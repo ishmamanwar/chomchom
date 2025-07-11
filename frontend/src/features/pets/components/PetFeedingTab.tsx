@@ -13,27 +13,48 @@ export default function PetFeedingTab() {
     food: "",
     quantity: "",
   });
+  const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const addEntry = () => {
+  const saveEntry = () => {
     if (!form.time || !form.food || !form.quantity) return;
-    setEntries([...entries, form]);
+
+    if (editIndex !== null) {
+      const updated = [...entries];
+      updated[editIndex] = form;
+      setEntries(updated);
+      setEditIndex(null);
+    } else {
+      setEntries([...entries, form]);
+    }
+
     setForm({ time: "", food: "", quantity: "" });
+  };
+
+  const deleteEntry = (index: number) => {
+    const updated = [...entries];
+    updated.splice(index, 1);
+    setEntries(updated);
+    if (editIndex === index) setEditIndex(null);
+  };
+
+  const editEntry = (index: number) => {
+    setForm(entries[index]);
+    setEditIndex(index);
   };
 
   return (
     <div>
-      <h3>Add Feeding Entry</h3>
+      <h3>{editIndex !== null ? "Edit Feeding Entry" : "Add Feeding Entry"}</h3>
       <div style={{ display: "flex", gap: 8 }}>
         <input
           type="time"
           name="time"
           value={form.time}
           onChange={handleChange}
-          placeholder="Time"
         />
         <input
           type="text"
@@ -49,7 +70,9 @@ export default function PetFeedingTab() {
           onChange={handleChange}
           placeholder="Quantity"
         />
-        <button onClick={addEntry}>Add</button>
+        <button onClick={saveEntry}>
+          {editIndex !== null ? "Update" : "Add"}
+        </button>
       </div>
 
       <h4 style={{ marginTop: 20 }}>Feeding Schedule</h4>
@@ -57,6 +80,15 @@ export default function PetFeedingTab() {
         {entries.map((entry, index) => (
           <li key={index}>
             {entry.time} — {entry.food} ({entry.quantity})
+            <button onClick={() => editEntry(index)} style={{ marginLeft: 8 }}>
+              Edit
+            </button>
+            <button
+              onClick={() => deleteEntry(index)}
+              style={{ marginLeft: 4 }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
