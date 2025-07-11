@@ -37,8 +37,8 @@ export default function PetDetailsPage() {
       <div style={{ marginTop: 24 }}>
         {activeTab === "Overview" && <PetOverviewTab pet={pet} />}
         {activeTab === "Feeding" && <PetFeedingTab />}
-        {/* {activeTab === "Medication" && <PetMedicationTab />}
-        {activeTab === "Vet" && <PetVetTab />} */}
+        {activeTab === "Medication" && <PetMedicationTab />}
+        {/* {activeTab === "Vet" && <PetVetTab />} */}
       </div>
     </div>
   );
