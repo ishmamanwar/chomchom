@@ -38,7 +38,7 @@ export default function PetDetailsPage() {
         {activeTab === "Overview" && <PetOverviewTab pet={pet} />}
         {activeTab === "Feeding" && <PetFeedingTab />}
         {activeTab === "Medication" && <PetMedicationTab />}
-        {/* {activeTab === "Vet" && <PetVetTab />} */}
+        {activeTab === "Vet" && <PetVetTab />}
       </div>
     </div>
   );
