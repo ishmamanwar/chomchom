@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Pet } from "../features/pets/types";
 
 interface Props {
@@ -6,8 +7,13 @@ interface Props {
 }
 
 export default function PetCard({ pet, onRemove }: Props) {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ border: "1px solid #ccc", borderRadius: 8, padding: 16 }}>
+    <div
+      style={{ border: "1px solid #ccc", borderRadius: 8, padding: 16, cursor: "pointer" }}
+      onClick={() => navigate(`/pets/${pet.id}`)}
+    >
       <img
         src={pet.imageUrl}
         alt={pet.name}
@@ -17,7 +23,9 @@ export default function PetCard({ pet, onRemove }: Props) {
       />
       <h3>{pet.name}</h3>
       <p>Type: {pet.type}</p>
-      <button onClick={() => onRemove(pet.id)}>Remove</button>
+      <button onClick={(e) => { e.stopPropagation(); onRemove(pet.id); }}>
+        Remove
+      </button>
     </div>
   );
 }
