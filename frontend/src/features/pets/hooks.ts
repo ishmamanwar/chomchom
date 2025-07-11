@@ -1,13 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Pet } from "./types";
-import { mockPets } from "./mockPets";
+
+const API_BASE_URL = "http://127.0.0.1:5000/api";
 
 export function usePets() {
-  const [pets, setPets] = useState<Pet[]>(mockPets);
+  const [pets, setPets] = useState<Pet[]>([]);
 
-  const addPet = (pet: Pet) => setPets((prev) => [...prev, pet]);
-  const removePet = (id: string) =>
-    setPets((prev) => prev.filter((pet) => pet.id !== id));
+  useEffect(() => {
+    axios
+      .get<Pet[]>(`${API_BASE_URL}/pets`)
+      .then((response) => setPets(response.data))
+      .catch((error) => console.error("Failed to fetch pets", error));
+  }, []);
 
-  return { pets, addPet, removePet };
+  const addPet = (pet: Omit<Pet, "id">) => {
+    axios
+      .post<Pet>(`${API_BASE_URL}/pets`, pet)
+      .then((response) => {
+        setPets((prev) => [...prev, response.data]);
+      })
+      .catch((error) => console.error("Failed to add pet", error));
+  };
+
+  const removePet = (id: string) => {
+    axios
+      .delete(`${API_BASE_URL}/pets/${id}`)
+      .then(() => {
+        setPets((prev) => prev.filter((pet) => pet.id !== id));
+      })
+      .catch((error) => console.error("Failed to delete pet", error));
+  };
+
+  return {
+    pets,
+    addPet,
+    removePet,
+  };
+}
+
+export function usePetById(id: string | undefined) {
+  const [pet, setPet] = useState<Pet | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    axios
+      .get<Pet>(`${API_BASE_URL}/pets/${id}`)
+      .then((res) => setPet(res.data))
+      .catch((err) => {
+        console.error("Failed to fetch pet by ID", err);
+        setPet(null);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  return { pet, loading };
 }

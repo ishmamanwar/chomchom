@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Chomchom",
+    "type": "cat",
+    "birthDate": "2021-05-20",
+    "imageUrl": "https://placekittens.com/200/300"
+  },
+  {
+    "id": "2",
+    "name": "Tiger",
+    "type": "dog",
+    "birthDate": "2020-08-10",
+    "imageUrl": "https://placedog.net/200/200?id=2"
+  },
+  {
+    "id": "3b8e955d-683c-4c03-9451-f1fc103ccbe9",
+    "name": "Kitty",
+    "type": "cat",
+    "birthDate": "2021-04-05",
+    "imageUrl": "https://placecats.com/millie_neo/300/200"
+  }
+]
