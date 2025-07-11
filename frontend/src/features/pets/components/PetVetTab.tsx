@@ -16,27 +16,73 @@ export default function PetVetTab() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [appointmentTime, setAppointmentTime] = useState("");
   const [appointments, setAppointments] = useState<VetAppointment[]>([]);
+  const [appointmentEditIndex, setAppointmentEditIndex] = useState<
+    number | null
+  >(null);
 
   const [vaccinationForm, setVaccinationForm] = useState<Vaccination>({
     name: "",
     date: "",
   });
   const [vaccinations, setVaccinations] = useState<Vaccination[]>([]);
+  const [vaccineEditIndex, setVaccineEditIndex] = useState<number | null>(null);
 
-  const addAppointment = () => {
+  const addOrUpdateAppointment = () => {
     if (!appointmentTime) return;
     const dateStr = selectedDate.toISOString().split("T")[0];
-    setAppointments([
-      ...appointments,
-      { date: dateStr, time: appointmentTime },
-    ]);
+    const newEntry = { date: dateStr, time: appointmentTime };
+
+    if (appointmentEditIndex !== null) {
+      const updated = [...appointments];
+      updated[appointmentEditIndex] = newEntry;
+      setAppointments(updated);
+      setAppointmentEditIndex(null);
+    } else {
+      setAppointments([...appointments, newEntry]);
+    }
+
     setAppointmentTime("");
   };
 
-  const addVaccination = () => {
+  const editAppointment = (index: number) => {
+    const appt = appointments[index];
+    setSelectedDate(new Date(appt.date));
+    setAppointmentTime(appt.time);
+    setAppointmentEditIndex(index);
+  };
+
+  const deleteAppointment = (index: number) => {
+    const updated = [...appointments];
+    updated.splice(index, 1);
+    setAppointments(updated);
+    if (appointmentEditIndex === index) setAppointmentEditIndex(null);
+  };
+
+  const addOrUpdateVaccination = () => {
     if (!vaccinationForm.name || !vaccinationForm.date) return;
-    setVaccinations([...vaccinations, vaccinationForm]);
+
+    if (vaccineEditIndex !== null) {
+      const updated = [...vaccinations];
+      updated[vaccineEditIndex] = vaccinationForm;
+      setVaccinations(updated);
+      setVaccineEditIndex(null);
+    } else {
+      setVaccinations([...vaccinations, vaccinationForm]);
+    }
+
     setVaccinationForm({ name: "", date: "" });
+  };
+
+  const editVaccination = (index: number) => {
+    setVaccinationForm(vaccinations[index]);
+    setVaccineEditIndex(index);
+  };
+
+  const deleteVaccination = (index: number) => {
+    const updated = [...vaccinations];
+    updated.splice(index, 1);
+    setVaccinations(updated);
+    if (vaccineEditIndex === index) setVaccineEditIndex(null);
   };
 
   return (
@@ -62,8 +108,8 @@ export default function PetVetTab() {
               style={{ marginLeft: 8 }}
             />
           </label>
-          <button onClick={addAppointment} style={{ marginLeft: 12 }}>
-            Add Appointment
+          <button onClick={addOrUpdateAppointment} style={{ marginLeft: 12 }}>
+            {appointmentEditIndex !== null ? "Update" : "Add"} Appointment
           </button>
         </div>
 
@@ -72,6 +118,18 @@ export default function PetVetTab() {
           {appointments.map((appt, index) => (
             <li key={index}>
               {appt.date} — {appt.time}
+              <button
+                onClick={() => editAppointment(index)}
+                style={{ marginLeft: 8 }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteAppointment(index)}
+                style={{ marginLeft: 4 }}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
@@ -96,7 +154,9 @@ export default function PetVetTab() {
               setVaccinationForm({ ...vaccinationForm, date: e.target.value })
             }
           />
-          <button onClick={addVaccination}>Add</button>
+          <button onClick={addOrUpdateVaccination}>
+            {vaccineEditIndex !== null ? "Update" : "Add"}
+          </button>
         </div>
 
         <h4 style={{ marginTop: 20 }}>Past Vaccinations</h4>
@@ -104,6 +164,18 @@ export default function PetVetTab() {
           {vaccinations.map((vax, index) => (
             <li key={index}>
               {vax.date} — {vax.name}
+              <button
+                onClick={() => editVaccination(index)}
+                style={{ marginLeft: 8 }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteVaccination(index)}
+                style={{ marginLeft: 4 }}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
