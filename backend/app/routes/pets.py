@@ -22,6 +22,14 @@ def get_pets():
     pets = load_pets()
     return jsonify(pets)
 
+@pets_bp.route("/<pet_id>", methods=["GET"])
+def get_pet_by_id(pet_id):
+    pets = load_pets()
+    pet = next((p for p in pets if p["id"] == pet_id), None)
+    if pet:
+        return jsonify(pet)
+    return jsonify({"error": "Pet not found"}), 404
+
 @pets_bp.route("", methods=["POST"])
 def add_pet():
     pets = load_pets()

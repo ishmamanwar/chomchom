@@ -38,3 +38,22 @@ export function usePets() {
     removePet,
   };
 }
+
+export function usePetById(id: string | undefined) {
+  const [pet, setPet] = useState<Pet | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    axios
+      .get<Pet>(`${API_BASE_URL}/pets/${id}`)
+      .then((res) => setPet(res.data))
+      .catch((err) => {
+        console.error("Failed to fetch pet by ID", err);
+        setPet(null);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  return { pet, loading };
+}
