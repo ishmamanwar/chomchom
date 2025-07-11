@@ -7,10 +7,10 @@
     "imageUrl": "https://placekittens.com/200/300"
   },
   {
-    "id": "fb7c3497-3859-460d-8c9e-cf67a7fcc459",
-    "name": "Milo",
-    "type": "cat",
-    "birthDate": "2022-04-01",
-    "imageUrl": "https://placekitten.com/300/300"
+    "id": "2",
+    "name": "Tiger",
+    "type": "dog",
+    "birthDate": "2020-08-10",
+    "imageUrl": "https://placedog.net/200/200?id=2"
   }
 ]

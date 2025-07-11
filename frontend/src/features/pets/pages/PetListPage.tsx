@@ -3,7 +3,7 @@ import { usePets } from "../hooks";
 import PetCard from "../../../components/PetCard";
 
 export default function PetListPage() {
-  const { pets, addPet, removePet } = usePets();
+  const { pets, removePet } = usePets();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -27,7 +27,6 @@ export default function PetListPage() {
       ...form,
     };
 
-    addPet(newPet);
     setForm({ name: "", type: "dog", birthDate: "", imageUrl: "" });
     setIsModalOpen(false);
   };
