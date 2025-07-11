@@ -14,6 +14,15 @@ export function usePets() {
       .catch((error) => console.error("Failed to fetch pets", error));
   }, []);
 
+  const addPet = (pet: Omit<Pet, "id">) => {
+    axios
+      .post<Pet>(`${API_BASE_URL}/pets`, pet)
+      .then((response) => {
+        setPets((prev) => [...prev, response.data]);
+      })
+      .catch((error) => console.error("Failed to add pet", error));
+  };
+
   const removePet = (id: string) => {
     axios
       .delete(`${API_BASE_URL}/pets/${id}`)
@@ -25,6 +34,7 @@ export function usePets() {
 
   return {
     pets,
+    addPet,
     removePet,
   };
 }
