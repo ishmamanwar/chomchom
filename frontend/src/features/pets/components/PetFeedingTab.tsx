@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 interface FeedingEntry {
+  id: string;
   time: string;
   food: string;
   quantity: string;
@@ -8,12 +9,12 @@ interface FeedingEntry {
 
 export default function PetFeedingTab() {
   const [entries, setEntries] = useState<FeedingEntry[]>([]);
-  const [form, setForm] = useState<FeedingEntry>({
+  const [form, setForm] = useState<Omit<FeedingEntry, "id">>({
     time: "",
     food: "",
     quantity: "",
   });
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editId, setEditId] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,33 +23,43 @@ export default function PetFeedingTab() {
   const saveEntry = () => {
     if (!form.time || !form.food || !form.quantity) return;
 
-    if (editIndex !== null) {
-      const updated = [...entries];
-      updated[editIndex] = form;
-      setEntries(updated);
-      setEditIndex(null);
+    if (editId !== null) {
+      setEntries((prev) =>
+        prev.map((entry) =>
+          entry.id === editId ? { ...entry, ...form } : entry
+        )
+      );
+      setEditId(null);
     } else {
-      setEntries([...entries, form]);
+      setEntries((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID?.() || String(Date.now()),
+          ...form,
+        },
+      ]);
     }
 
     setForm({ time: "", food: "", quantity: "" });
   };
 
-  const deleteEntry = (index: number) => {
-    const updated = [...entries];
-    updated.splice(index, 1);
-    setEntries(updated);
-    if (editIndex === index) setEditIndex(null);
+  const deleteEntry = (id: string) => {
+    setEntries((prev) => prev.filter((e) => e.id !== id));
+    if (editId === id) setEditId(null);
   };
 
-  const editEntry = (index: number) => {
-    setForm(entries[index]);
-    setEditIndex(index);
+  const editEntry = (id: string) => {
+    const entry = entries.find((e) => e.id === id);
+    if (entry) {
+      const { id: _, ...rest } = entry;
+      setForm(rest);
+      setEditId(id);
+    }
   };
 
   return (
     <div>
-      <h3>{editIndex !== null ? "Edit Feeding Entry" : "Add Feeding Entry"}</h3>
+      <h3>{editId !== null ? "Edit Feeding Entry" : "Add Feeding Entry"}</h3>
       <div style={{ display: "flex", gap: 8 }}>
         <input
           type="time"
@@ -71,26 +82,32 @@ export default function PetFeedingTab() {
           placeholder="Quantity"
         />
         <button onClick={saveEntry}>
-          {editIndex !== null ? "Update" : "Add"}
+          {editId !== null ? "Update" : "Add"}
         </button>
       </div>
 
       <h4 style={{ marginTop: 20 }}>Feeding Schedule</h4>
       <ul>
-        {entries.map((entry, index) => (
-          <li key={index}>
-            {entry.time} — {entry.food} ({entry.quantity})
-            <button onClick={() => editEntry(index)} style={{ marginLeft: 8 }}>
-              Edit
-            </button>
-            <button
-              onClick={() => deleteEntry(index)}
-              style={{ marginLeft: 4 }}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        {entries
+          .slice()
+          .sort((a, b) => a.time.localeCompare(b.time))
+          .map((entry) => (
+            <li key={entry.id}>
+              {entry.time} — {entry.food} ({entry.quantity})
+              <button
+                onClick={() => editEntry(entry.id)}
+                style={{ marginLeft: 8 }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteEntry(entry.id)}
+                style={{ marginLeft: 4 }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   );

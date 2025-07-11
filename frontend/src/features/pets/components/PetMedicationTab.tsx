@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 interface MedicationEntry {
+  id: string;
   time: string;
   medication: string;
   quantity: string;
@@ -8,12 +9,12 @@ interface MedicationEntry {
 
 export default function PetMedicationTab() {
   const [entries, setEntries] = useState<MedicationEntry[]>([]);
-  const [form, setForm] = useState<MedicationEntry>({
+  const [form, setForm] = useState<Omit<MedicationEntry, "id">>({
     time: "",
     medication: "",
     quantity: "",
   });
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editId, setEditId] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,34 +23,44 @@ export default function PetMedicationTab() {
   const saveEntry = () => {
     if (!form.time || !form.medication || !form.quantity) return;
 
-    if (editIndex !== null) {
-      const updated = [...entries];
-      updated[editIndex] = form;
-      setEntries(updated);
-      setEditIndex(null);
+    if (editId !== null) {
+      setEntries((prev) =>
+        prev.map((entry) =>
+          entry.id === editId ? { ...entry, ...form } : entry
+        )
+      );
+      setEditId(null);
     } else {
-      setEntries([...entries, form]);
+      setEntries((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID?.() || String(Date.now()),
+          ...form,
+        },
+      ]);
     }
 
     setForm({ time: "", medication: "", quantity: "" });
   };
 
-  const deleteEntry = (index: number) => {
-    const updated = [...entries];
-    updated.splice(index, 1);
-    setEntries(updated);
-    if (editIndex === index) setEditIndex(null);
+  const deleteEntry = (id: string) => {
+    setEntries((prev) => prev.filter((e) => e.id !== id));
+    if (editId === id) setEditId(null);
   };
 
-  const editEntry = (index: number) => {
-    setForm(entries[index]);
-    setEditIndex(index);
+  const editEntry = (id: string) => {
+    const entry = entries.find((e) => e.id === id);
+    if (entry) {
+      const { id: _, ...rest } = entry;
+      setForm(rest);
+      setEditId(id);
+    }
   };
 
   return (
     <div>
       <h3>
-        {editIndex !== null ? "Edit Medication Entry" : "Add Medication Entry"}
+        {editId !== null ? "Edit Medication Entry" : "Add Medication Entry"}
       </h3>
       <div style={{ display: "flex", gap: 8 }}>
         <input
@@ -73,26 +84,32 @@ export default function PetMedicationTab() {
           placeholder="Quantity"
         />
         <button onClick={saveEntry}>
-          {editIndex !== null ? "Update" : "Add"}
+          {editId !== null ? "Update" : "Add"}
         </button>
       </div>
 
       <h4 style={{ marginTop: 20 }}>Medication Schedule</h4>
       <ul>
-        {entries.map((entry, index) => (
-          <li key={index}>
-            {entry.time} — {entry.medication} ({entry.quantity})
-            <button onClick={() => editEntry(index)} style={{ marginLeft: 8 }}>
-              Edit
-            </button>
-            <button
-              onClick={() => deleteEntry(index)}
-              style={{ marginLeft: 4 }}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        {entries
+          .slice()
+          .sort((a, b) => a.time.localeCompare(b.time))
+          .map((entry) => (
+            <li key={entry.id}>
+              {entry.time} — {entry.medication} ({entry.quantity})
+              <button
+                onClick={() => editEntry(entry.id)}
+                style={{ marginLeft: 8 }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => deleteEntry(entry.id)}
+                style={{ marginLeft: 4 }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   );
