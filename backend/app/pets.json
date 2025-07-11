@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "name": "Chomchom",
+    "type": "cat",
+    "birthDate": "2021-05-20",
+    "imageUrl": "https://placekittens.com/200/300"
+  },
+  {
+    "id": "fb7c3497-3859-460d-8c9e-cf67a7fcc459",
+    "name": "Milo",
+    "type": "cat",
+    "birthDate": "2022-04-01",
+    "imageUrl": "https://placekitten.com/300/300"
+  }
+]
