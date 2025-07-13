@@ -5,7 +5,7 @@ from app.models.pet import Pet
 
 pets_bp = Blueprint("pets", __name__, url_prefix="/api/pets")
 
-PETS_FILE = os.path.join(os.path.dirname(__file__), "..", "pets.json")
+PETS_FILE = os.path.join(os.path.dirname(__file__), "../data", "pets.json")
 
 def load_pets():
     if os.path.exists(PETS_FILE):
