@@ -1,19 +1,17 @@
+import { useParams } from "react-router-dom";
+import { useMedication } from "../../medications/hooks";
 import { useState } from "react";
 
-interface MedicationEntry {
-  id: string;
-  time: string;
-  medication: string;
-  quantity: string;
-}
-
 export default function PetMedicationTab() {
-  const [entries, setEntries] = useState<MedicationEntry[]>([]);
-  const [form, setForm] = useState<Omit<MedicationEntry, "id">>({
+  const { id: petId } = useParams();
+  const { entries, add, remove, update } = useMedication(petId || "");
+
+  const [form, setForm] = useState({
     time: "",
-    medication: "",
+    med: "",
     quantity: "",
   });
+
   const [editId, setEditId] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,47 +19,29 @@ export default function PetMedicationTab() {
   };
 
   const saveEntry = () => {
-    if (!form.time || !form.medication || !form.quantity) return;
+    if (!form.time || !form.med || !form.quantity) return;
 
     if (editId !== null) {
-      setEntries((prev) =>
-        prev.map((entry) =>
-          entry.id === editId ? { ...entry, ...form } : entry
-        )
-      );
+      update(editId, form);
       setEditId(null);
     } else {
-      setEntries((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID?.() || String(Date.now()),
-          ...form,
-        },
-      ]);
+      add(form);
     }
 
-    setForm({ time: "", medication: "", quantity: "" });
+    setForm({ time: "", med: "", quantity: "" });
   };
 
-  const deleteEntry = (id: string) => {
-    setEntries((prev) => prev.filter((e) => e.id !== id));
-    if (editId === id) setEditId(null);
-  };
-
-  const editEntry = (id: string) => {
-    const entry = entries.find((e) => e.id === id);
+  const editEntry = (entryId: string) => {
+    const entry = entries.find((e) => e.id === entryId);
     if (entry) {
-      const { id: _, ...rest } = entry;
-      setForm(rest);
-      setEditId(id);
+      setForm({ time: entry.time, med: entry.med, quantity: entry.quantity });
+      setEditId(entryId);
     }
   };
 
   return (
     <div>
-      <h3>
-        {editId !== null ? "Edit Medication Entry" : "Add Medication Entry"}
-      </h3>
+      <h3>{editId ? "Edit Medication Entry" : "Add Medication Entry"}</h3>
       <div style={{ display: "flex", gap: 8 }}>
         <input
           type="time"
@@ -71,21 +51,19 @@ export default function PetMedicationTab() {
         />
         <input
           type="text"
-          name="medication"
-          value={form.medication}
-          onChange={handleChange}
+          name="med"
           placeholder="Medication"
+          value={form.med}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="quantity"
+          placeholder="Quantity"
           value={form.quantity}
           onChange={handleChange}
-          placeholder="Quantity"
         />
-        <button onClick={saveEntry}>
-          {editId !== null ? "Update" : "Add"}
-        </button>
+        <button onClick={saveEntry}>{editId ? "Update" : "Add"}</button>
       </div>
 
       <h4 style={{ marginTop: 20 }}>Medication Schedule</h4>
@@ -95,7 +73,7 @@ export default function PetMedicationTab() {
           .sort((a, b) => a.time.localeCompare(b.time))
           .map((entry) => (
             <li key={entry.id}>
-              {entry.time} — {entry.medication} ({entry.quantity})
+              {entry.time} — {entry.med} ({entry.quantity})
               <button
                 onClick={() => editEntry(entry.id)}
                 style={{ marginLeft: 8 }}
@@ -103,7 +81,7 @@ export default function PetMedicationTab() {
                 Edit
               </button>
               <button
-                onClick={() => deleteEntry(entry.id)}
+                onClick={() => remove(entry.id)}
                 style={{ marginLeft: 4 }}
               >
                 Delete
