@@ -1,15 +1,12 @@
+import { useParams } from "react-router-dom";
+import { useFeeding } from "../../feeding/hooks";
 import { useState } from "react";
 
-interface FeedingEntry {
-  id: string;
-  time: string;
-  food: string;
-  quantity: string;
-}
-
 export default function PetFeedingTab() {
-  const [entries, setEntries] = useState<FeedingEntry[]>([]);
-  const [form, setForm] = useState<Omit<FeedingEntry, "id">>({
+  const { id: petId } = useParams<{ id: string }>();
+  const { entries, addEntry, updateEntry, deleteEntry } = useFeeding(petId!);
+
+  const [form, setForm] = useState({
     time: "",
     food: "",
     quantity: "",
@@ -20,46 +17,30 @@ export default function PetFeedingTab() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const saveEntry = () => {
+  const save = () => {
     if (!form.time || !form.food || !form.quantity) return;
 
-    if (editId !== null) {
-      setEntries((prev) =>
-        prev.map((entry) =>
-          entry.id === editId ? { ...entry, ...form } : entry
-        )
-      );
+    if (editId) {
+      updateEntry(editId, form);
       setEditId(null);
     } else {
-      setEntries((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID?.() || String(Date.now()),
-          ...form,
-        },
-      ]);
+      addEntry(form);
     }
 
     setForm({ time: "", food: "", quantity: "" });
   };
 
-  const deleteEntry = (id: string) => {
-    setEntries((prev) => prev.filter((e) => e.id !== id));
-    if (editId === id) setEditId(null);
-  };
-
-  const editEntry = (id: string) => {
-    const entry = entries.find((e) => e.id === id);
+  const startEdit = (entryId: string) => {
+    const entry = entries.find((e) => e.id === entryId);
     if (entry) {
-      const { id: _, ...rest } = entry;
-      setForm(rest);
-      setEditId(id);
+      setForm({ time: entry.time, food: entry.food, quantity: entry.quantity });
+      setEditId(entryId);
     }
   };
 
   return (
     <div>
-      <h3>{editId !== null ? "Edit Feeding Entry" : "Add Feeding Entry"}</h3>
+      <h3>{editId ? "Edit Feeding Entry" : "Add Feeding Entry"}</h3>
       <div style={{ display: "flex", gap: 8 }}>
         <input
           type="time"
@@ -81,9 +62,7 @@ export default function PetFeedingTab() {
           onChange={handleChange}
           placeholder="Quantity"
         />
-        <button onClick={saveEntry}>
-          {editId !== null ? "Update" : "Add"}
-        </button>
+        <button onClick={save}>{editId ? "Update" : "Add"}</button>
       </div>
 
       <h4 style={{ marginTop: 20 }}>Feeding Schedule</h4>
@@ -95,7 +74,7 @@ export default function PetFeedingTab() {
             <li key={entry.id}>
               {entry.time} — {entry.food} ({entry.quantity})
               <button
-                onClick={() => editEntry(entry.id)}
+                onClick={() => startEdit(entry.id)}
                 style={{ marginLeft: 8 }}
               >
                 Edit
