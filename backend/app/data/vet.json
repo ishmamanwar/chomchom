@@ -1,0 +1,32 @@
+{
+  "dictionary": {
+    "appointments": [],
+    "vaccinations": []
+  },
+  "2": {
+    "appointments": [
+      {
+        "id": "bdac7942-306d-4809-8ca9-44d88e3b0818",
+        "date": "2025-07-20",
+        "time": "10:30"
+      }
+    ],
+    "vaccinations": []
+  },
+  "1": {
+    "appointments": [
+      {
+        "id": "4e9ae6e6-78cb-4ada-959f-90e0e3b7d1f4",
+        "date": "2025-07-29",
+        "time": "11:30"
+      }
+    ],
+    "vaccinations": [
+      {
+        "id": "51014a25-cdc3-4ee0-8220-c163de09bde4",
+        "name": "Rabies",
+        "date": "2025-07-01"
+      }
+    ]
+  }
+}

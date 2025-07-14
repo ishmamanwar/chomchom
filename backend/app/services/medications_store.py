@@ -1,6 +1,6 @@
 import os
 import json
-import uuid
+from app.models.medication import Medication
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), "../data/medications.json")
 
@@ -22,17 +22,11 @@ def get_medications_for_pet(pet_id):
 
 
 def add_medication_entry(pet_id, data):
-    entry = {
-        "id": str(uuid.uuid4()),
-        "pet_id": pet_id,
-        "time": data["time"],
-        "med": data["med"],
-        "quantity": data["quantity"],
-    }
+    entry = Medication(pet_id, data["time"], data["med"], data["quantity"])
     all_data = load_medications()
-    all_data.append(entry)
+    all_data.append(entry.to_dict())
     save_medications(all_data)
-    return entry
+    return entry.to_dict()
 
 
 def update_medication_entry(pet_id, entry_id, updated_data):
