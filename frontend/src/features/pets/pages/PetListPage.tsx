@@ -1,34 +1,19 @@
 import { useState } from "react";
 import { usePets } from "../hooks";
 import PetCard from "../../../components/PetCard";
+import PetModal from "../../../components/PetModal";
+import { Pet } from "../../../features/pets/types";
 
 export default function PetListPage() {
   const { pets, addPet, removePet } = usePets();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    type: "dog" as "dog" | "cat" | "bird" | "other",
-    birthDate: "",
-    imageUrl: "",
-  });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = () => {
-    if (!form.name || !form.birthDate) return;
-
+  const handleSave = (petData: Omit<Pet, "id">) => {
     const newPet = {
       id: crypto.randomUUID?.() || String(Date.now()),
-      ...form,
+      ...petData,
     };
-
     addPet(newPet);
-    setForm({ name: "", type: "dog", birthDate: "", imageUrl: "" });
     setIsModalOpen(false);
   };
 
@@ -66,48 +51,15 @@ export default function PetListPage() {
               background: "white",
               padding: 24,
               borderRadius: 8,
-              display: "flex",
-              flexDirection: "column",
-              gap: 12,
-              width: 320,
+              width: 400,
+              boxShadow: "0 0 12px rgba(0, 0, 0, 0.2)", // shadow here only
             }}
           >
-            <h2>Add New Pet</h2>
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Pet Name"
-              value={form.name}
-              onChange={handleChange}
+            <PetModal
+              pet={null}
+              onSave={handleSave}
+              onClose={() => setIsModalOpen(false)}
             />
-
-            <select name="type" value={form.type} onChange={handleChange}>
-              <option value="dog">Dog</option>
-              <option value="cat">Cat</option>
-              <option value="bird">Bird</option>
-              <option value="other">Other</option>
-            </select>
-
-            <input
-              type="date"
-              name="birthDate"
-              value={form.birthDate}
-              onChange={handleChange}
-            />
-
-            <input
-              type="text"
-              name="imageUrl"
-              placeholder="Image URL (optional)"
-              value={form.imageUrl}
-              onChange={handleChange}
-            />
-
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <button onClick={() => setIsModalOpen(false)}>Cancel</button>
-              <button onClick={handleSubmit}>Save</button>
-            </div>
           </div>
         </div>
       )}
