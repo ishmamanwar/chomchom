@@ -24,6 +24,8 @@ def upload_file():
         filename = secure_filename(file.filename)
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
-        return jsonify({"url": f"/uploads/{filename}"}), 201
+        return jsonify({
+    "url": f"{request.host_url.rstrip('/')}/uploads/{filename}"
+}), 201
 
     return jsonify({"error": "Invalid file type"}), 400

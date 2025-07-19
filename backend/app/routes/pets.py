@@ -47,6 +47,24 @@ def add_pet():
 @pets_bp.route("/<pet_id>", methods=["DELETE"])
 def delete_pet(pet_id):
     pets = load_pets()
+    pet_to_delete = next((pet for pet in pets if pet["id"] == pet_id), None)
+
+    if not pet_to_delete:
+        return jsonify({"error": "Pet not found"}), 404
+
+    # Remove from pets list
     pets = [pet for pet in pets if pet["id"] != pet_id]
     save_pets(pets)
+
+    # Attempt to delete local image if it's from uploads folder
+    image_url = pet_to_delete.get("imageUrl", "")
+    if image_url.startswith("http://127.0.0.1:5000/uploads/"):
+        filename = image_url.split("/uploads/")[-1]
+        file_path = os.path.join(os.path.dirname(__file__), "../../../uploads", filename)
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except Exception as e:
+            print(f"Failed to delete image file: {e}")
+
     return "", 204

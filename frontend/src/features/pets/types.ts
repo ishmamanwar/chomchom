@@ -1,7 +1,7 @@
 export interface Pet {
   id: string;
   name: string;
-  type: "dog" | "cat" | "bird" | "other";
+  type: string;
   birthDate: string;
   imageUrl?: string;
 }
