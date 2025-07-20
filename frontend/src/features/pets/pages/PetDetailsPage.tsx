@@ -17,7 +17,7 @@ export default function PetDetailsPage() {
   if (!pet) return <p>Pet not found</p>;
 
   return (
-    <div style={{ padding: 32 }}>
+    <div style={{ paddingLeft: 32, paddingRight: 32 }}>
       <h1>{pet.name}’s Profile</h1>
       <div style={{ display: "flex", gap: 16 }}>
         {tabs.map((tab) => (
