@@ -18,43 +18,19 @@ export default function PetListPage() {
   };
 
   return (
-    <div style={{ padding: 32 }}>
-      <h1>Your Pets</h1>
-
+    <div className="centered-container">
       <button onClick={() => setIsModalOpen(true)} style={{ marginBottom: 16 }}>
         ➕ Add Pet
       </button>
-
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+      <div className="pet-grid">
         {pets.map((pet) => (
           <PetCard key={pet.id} pet={pet} onRemove={removePet} />
         ))}
       </div>
 
       {isModalOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-          }}
-        >
-          <div
-            style={{
-              background: "white",
-              padding: 24,
-              borderRadius: 8,
-              width: 400,
-              boxShadow: "0 0 12px rgba(0, 0, 0, 0.2)", // shadow here only
-            }}
-          >
+        <div className="modal-overlay">
+          <div className="modal-content">
             <PetModal
               pet={null}
               onSave={handleSave}
