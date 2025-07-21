@@ -19,13 +19,19 @@ export default function PetListPage() {
 
   return (
     <div className="centered-container">
-      <button onClick={() => setIsModalOpen(true)} className="add-pet-button">
-        ➕
-      </button>
-      <div className="pet-grid">
-        {pets.map((pet) => (
-          <PetCard key={pet.id} pet={pet} onRemove={removePet} />
-        ))}
+      <div className="content-container">
+        <div className="pet-grid">
+          {pets.map((pet) => (
+            <PetCard key={pet.id} pet={pet} onRemove={removePet} />
+          ))}
+          <button
+            className="add-pet-button-as-card"
+            onClick={() => setIsModalOpen(true)}
+            aria-label="Add new pet"
+          >
+            +
+          </button>
+        </div>
       </div>
 
       {isModalOpen && (
