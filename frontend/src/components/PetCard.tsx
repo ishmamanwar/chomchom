@@ -32,8 +32,8 @@ export default function PetCard({ pet, onRemove }: Props) {
         alt={pet.name}
       />
       <h3>{pet.name}</h3>
-      <p>Birthday: {pet.birthDate}</p>
-      <p className="sound">{pet.type === "dog" ? "🐶 bark" : "🐱 meow"}</p>
+      <p>{pet.birthDate}</p>
+      <p className="sound">{pet.type === "dog" ? "~woof~" : "~meow~"}</p>
     </div>
   );
 }

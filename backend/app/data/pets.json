@@ -26,5 +26,19 @@
     "type": "cat",
     "birthDate": "2025-02-02",
     "imageUrl": "http://127.0.0.1:5000/uploads/pexels-pixabay-416160.jpg"
+  },
+  {
+    "id": "221dacc7-98fe-44ff-af7a-ba599ea42145",
+    "name": "sample cat",
+    "type": "cat",
+    "birthDate": "2021-02-21",
+    "imageUrl": ""
+  },
+  {
+    "id": "4fc08a8d-6622-4f2d-8f56-f7ba654c8ea0",
+    "name": "sample dog",
+    "type": "dog",
+    "birthDate": "2020-05-18",
+    "imageUrl": ""
   }
 ]

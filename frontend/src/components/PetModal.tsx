@@ -43,80 +43,75 @@ export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        width: "100%",
-        alignItems: "center",
-      }}
-    >
-      <h2 style={{ textAlign: "center", margin: 0 }}>
-        {pet ? "Edit Pet" : "Add New Pet"}
-      </h2>
+    <div className="modal-content">
+      <div className="modal-header">
+        <div className="modal-title">{pet ? "Edit Pet" : "Add New Pet"}</div>
+        <button
+          className="modal-close-button"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+      </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          maxWidth: 300,
-        }}
-      >
-        <label style={{ marginBottom: 8 }}>
+      <div>
+        <label className="modal-label">
           Name:
           <input
-            style={{ width: "100%", marginTop: 4 }}
+            type="text"
+            className="modal-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
 
-        <label style={{ marginBottom: 8 }}>
+        <label className="modal-label">
           Type:
-          <input
-            style={{ width: "100%", marginTop: 4 }}
+          <select
+            className="modal-input"
             value={type}
             onChange={(e) => setType(e.target.value)}
-          />
+          >
+            <option value="" disabled hidden>
+              Select Type
+            </option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+          </select>
         </label>
 
-        <label style={{ marginBottom: 8 }}>
+        <label className="modal-label">
           Birth Date:
           <input
             type="date"
-            style={{ width: "100%", marginTop: 4 }}
+            className="modal-input"
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
           />
         </label>
 
-        <label style={{ marginBottom: 8 }}>
+        <label className="modal-label">
           Image:
           <input
             type="file"
+            className="modal-input"
             onChange={handleFileChange}
-            style={{ marginTop: 4 }}
           />
         </label>
       </div>
 
       {fileUploading && <p>Uploading image...</p>}
+
       {imageUrl && (
-        <div style={{ marginTop: 8 }}>
-          <img
-            src={imageUrl}
-            alt="Pet preview"
-            style={{ maxWidth: "150px", borderRadius: "8px" }}
-          />
+        <div className="modal-preview-container">
+          <img src={imageUrl} alt="Pet preview" className="modal-preview-img" />
         </div>
       )}
 
-      <div style={{ marginTop: 16 }}>
-        <button onClick={handleSubmit}>Save</button>
-        <button onClick={onClose} style={{ marginLeft: 8 }}>
-          Cancel
+      <div className="modal-button-container">
+        <button className="modal-save-button" onClick={handleSubmit}>
+          Save
         </button>
       </div>
     </div>
