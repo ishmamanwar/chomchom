@@ -19,5 +19,12 @@
     "type": "cat",
     "birthDate": "2021-04-05",
     "imageUrl": "https://placecats.com/millie_neo/300/200"
+  },
+  {
+    "id": "d2991bb3-374d-461a-a8a0-d6c6d666180b",
+    "name": "example",
+    "type": "cat",
+    "birthDate": "2025-02-02",
+    "imageUrl": "http://127.0.0.1:5000/uploads/pexels-pixabay-416160.jpg"
   }
 ]

@@ -19,8 +19,8 @@ export default function PetListPage() {
 
   return (
     <div className="centered-container">
-      <button onClick={() => setIsModalOpen(true)} style={{ marginBottom: 16 }}>
-        ➕ Add Pet
+      <button onClick={() => setIsModalOpen(true)} className="add-pet-button">
+        ➕
       </button>
       <div className="pet-grid">
         {pets.map((pet) => (
