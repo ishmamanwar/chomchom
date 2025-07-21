@@ -36,13 +36,11 @@ export default function PetListPage() {
 
       {isModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <PetModal
-              pet={null}
-              onSave={handleSave}
-              onClose={() => setIsModalOpen(false)}
-            />
-          </div>
+          <PetModal
+            pet={null}
+            onSave={handleSave}
+            onClose={() => setIsModalOpen(false)}
+          />
         </div>
       )}
     </div>
