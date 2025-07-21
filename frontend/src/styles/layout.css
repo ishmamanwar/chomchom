@@ -1,9 +1,30 @@
+/* ========== Global Styles ========== */
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  background-color: #fffaf5;
+  background-color: #fff5e6;
+  background-size: 200px;
+  background-position: center;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff5e6;
+  background-image: url("https://tse2.mm.bing.net/th/id/OIP.XyJq9ptZq9tzE84cWFlZGQHaE7?pid=Api");
+  background-repeat: repeat;
+  background-size: 200px;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ========== Layout Containers ========== */
 .centered-layout {
   display: flex;
   justify-content: center;
@@ -11,45 +32,142 @@ body {
 }
 
 .content-container {
+  max-width: 1000px;
   width: 100%;
-  max-width: 800px;
+  margin: 0 auto;
 }
 
-.header {
+.centered-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+}
+
+/* ========== Header ========== */
+.header {
+  background-color: #f4e5ce;
+}
+
+.header-content {
+  display: flex;
   align-items: center;
-  padding: 24px 0;
+  gap: 5px;
 }
 
 .header-logo {
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
   cursor: pointer;
   object-fit: cover;
   transition: transform 0.2s;
 }
 
 .header-logo:hover {
-  transform: scale(1.25);
+  transform: scale(1.15);
 }
 
-.centered-container {
-  padding: 0 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.header-tagline {
+  font-style: italic;
+  color: #5c4332;
+  font-size: 1rem;
 }
 
+/* ========== Pet Grid ========== */
 .pet-grid {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 8px;
 }
 
+/* ========== Pet Card ========== */
+.pet-card {
+  background-color: #fff5e6;
+  border-radius: 12px;
+  padding: 16px;
+  width: 133.5px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: 2px solid #b9eac9;
+}
+
+.pet-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #cbeed7;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.pet-card h3 {
+  font-size: 16px;
+  color: #5c4332;
+  margin: 6px 0 2px;
+}
+
+.pet-card p {
+  font-size: 14px;
+  color: #6d4c3d;
+  margin: 2px 0;
+}
+
+.pet-card .sound {
+  font-size: 14px;
+  font-weight: bold;
+  color: #8e5d52;
+  margin-top: 4px;
+}
+
+.pet-card .remove-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  color: #a15555;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.pet-card .remove-button:hover {
+  background-color: #ffdada;
+}
+
+/* ========== Add Pet Button ========== */
+.add-pet-button-as-card {
+  width: 165.5px;
+  height: 200px;
+  font-size: 50px;
+  background-color: #e0f3e6;
+  color: #4d3e2a;
+  border: 2px dashed #b9eac9;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.add-pet-button-as-card:hover {
+  transform: scale(1.05);
+}
+
+/* ========== Modal ========== */
 .modal-overlay {
   position: fixed;
   top: 0;

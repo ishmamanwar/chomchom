@@ -5,12 +5,17 @@ export default function Header() {
 
   return (
     <header className="header">
-      <img
-        src="https://i.imgur.com/1isMEWh.png"
-        alt="Chomchom logo"
-        className="header-logo"
-        onClick={() => navigate("/")}
-      />
+      <div className="centered-layout">
+        <div className="content-container header-content">
+          <img
+            src="https://i.imgur.com/1isMEWh.png"
+            alt="Chomchom logo"
+            className="header-logo"
+            onClick={() => navigate("/")}
+          />
+          <span className="header-tagline">A simple pet management system</span>
+        </div>
+      </div>
     </header>
   );
 }
