@@ -14,7 +14,16 @@ export default function PetOverviewTab({ pet }: Props) {
   return (
     <div className="pet-overview-container">
       <div className="pet-image-frame">
-        <img src={pet.imageUrl} alt={pet.name} />
+        <img
+          src={
+            pet.imageUrl
+              ? pet.imageUrl
+              : pet.type === "dog"
+              ? "https://cdn.pixabay.com/photo/2022/01/26/02/10/dog-6967668_960_720.png"
+              : "https://cdn.pixabay.com/photo/2020/11/15/18/31/cat-5746771_960_720.png"
+          }
+          alt={pet.name}
+        />
       </div>
       <div className="pet-info-sticky">
         <h3>{pet.name}</h3>
