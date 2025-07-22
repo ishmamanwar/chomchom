@@ -46,7 +46,7 @@ body::before {
 .centered-layout {
   display: flex;
   justify-content: center;
-  padding: 0 24px;
+  padding: 10px 24px 0;
 }
 
 .content-container {
@@ -321,4 +321,84 @@ body::before {
 
 .modal-save-button:hover {
   background-color: #a3d8b4;
+}
+
+/* ========== Pet Details ========== */
+
+.pet-details-container {
+  padding: 0 16px;
+}
+
+.pet-tab-container {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-tab-row {
+  display: flex;
+  margin-left: 12px;
+}
+
+.pet-tab-row button {
+  font-size: 12px;
+}
+
+.pet-tab-new {
+  padding: 7px 9px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #5c4332;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pet-tab-new.active {
+  transform: scale(1.08);
+  position: relative;
+  z-index: 1;
+  margin-bottom: -0.5px;
+}
+
+.tab-overview {
+  background-color: #d3f0dd;
+}
+.tab-feeding {
+  background-color: #fff5c1;
+}
+.tab-medication {
+  background-color: #f7e1e6;
+}
+.tab-vet {
+  background-color: #cef0f5;
+}
+
+.pet-tab-content {
+  background-color: #fff5e6;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 2px solid transparent; /* default fallback */
+}
+
+.pet-tab-content.overview-content,
+.pet-tab-new.active.tab-overview {
+  border-color: #a0d3b8;
+}
+.pet-tab-content.feeding-content,
+.pet-tab-new.active.tab-feeding {
+  border-color: #e7d968;
+}
+.pet-tab-content.medication-content,
+.pet-tab-new.active.tab-medication {
+  border-color: #e4aeb9;
+}
+.pet-tab-content.vet-content,
+.pet-tab-new.active.tab-vet {
+  border-color: #87d0dd;
 }

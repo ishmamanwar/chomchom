@@ -17,28 +17,30 @@ export default function PetDetailsPage() {
   if (!pet) return <p>Pet not found</p>;
 
   return (
-    <div style={{ paddingLeft: 32, paddingRight: 32 }}>
-      <h1>{pet.name}’s Profile</h1>
-      <div style={{ display: "flex", gap: 16 }}>
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              padding: 8,
-              borderBottom: activeTab === tab ? "2px solid black" : "none",
-            }}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+    <div className="pet-details-container">
+      <div className="pet-tab-container">
+        <div className="pet-tab-row">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`pet-tab-new ${
+                activeTab === tab ? "active" : ""
+              } tab-${tab.toLowerCase()}`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-      <div style={{ marginTop: 24 }}>
-        {activeTab === "Overview" && <PetOverviewTab pet={pet} />}
-        {activeTab === "Feeding" && <PetFeedingTab />}
-        {activeTab === "Medication" && <PetMedicationTab />}
-        {activeTab === "Vet" && <PetVetTab />}
+        <div
+          className={`pet-tab-content ${activeTab.toLocaleLowerCase()}-content`}
+        >
+          {activeTab === "Overview" && <PetOverviewTab pet={pet} />}
+          {activeTab === "Feeding" && <PetFeedingTab />}
+          {activeTab === "Medication" && <PetMedicationTab />}
+          {activeTab === "Vet" && <PetVetTab />}
+        </div>
       </div>
     </div>
   );
