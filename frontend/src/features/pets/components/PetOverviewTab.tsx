@@ -12,16 +12,22 @@ export default function PetOverviewTab({ pet }: Props) {
   const months = ageInMonths % 12;
 
   return (
-    <div>
-      <img
-        src={pet.imageUrl}
-        alt={pet.name}
-        width={150}
-        height={150}
-        style={{ borderRadius: "50%", objectFit: "cover" }}
-      />
-      <p><strong>Type:</strong> {pet.type}</p>
-      <p><strong>Age:</strong> {years} year(s) and {months} month(s)</p>
+    <div className="pet-overview-container">
+      <div className="pet-image-frame">
+        <img src={pet.imageUrl} alt={pet.name} />
+      </div>
+      <div className="pet-info-sticky">
+        <h3>{pet.name}</h3>
+        <p>
+          <strong>Type:</strong> {pet.type}
+        </p>
+        <p>
+          <strong>Birth Date:</strong> {pet.birthDate}
+        </p>
+        <p>
+          <strong>Age:</strong> {years} year(s) and {months} month(s)
+        </p>
+      </div>
     </div>
   );
 }
