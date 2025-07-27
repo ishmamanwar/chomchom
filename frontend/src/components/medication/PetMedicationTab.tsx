@@ -1,94 +1,144 @@
 import { useParams } from "react-router-dom";
-import { useMedication } from "../../features/medications/hooks";
 import { useState } from "react";
+import { useMedication } from "../../features/medications/hooks";
+import MedicationEntryModal from "./MedicationEntryModal";
+import MedicationListModal from "./MedicationListModal";
 
 export default function PetMedicationTab() {
-  const { id: petId } = useParams();
-  const { entries, add, remove, update } = useMedication(petId || "");
-
-  const [form, setForm] = useState({
-    time: "",
-    med: "",
-    quantity: "",
-  });
+  const { id: petId } = useParams<{ id: string }>();
+  const { entries, add, update, remove } = useMedication(petId!);
 
   const [editId, setEditId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
+  const [form, setForm] = useState({ time: "", med: "", quantity: "" });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const saveEntry = () => {
-    if (!form.time || !form.med || !form.quantity) return;
-
-    if (editId !== null) {
-      update(editId, form);
-      setEditId(null);
-    } else {
-      add(form);
-    }
-
+  const openNewModal = () => {
     setForm({ time: "", med: "", quantity: "" });
+    setEditId(null);
+    setIsModalOpen(true);
   };
 
-  const editEntry = (entryId: string) => {
+  const startEdit = (entryId: string) => {
     const entry = entries.find((e) => e.id === entryId);
     if (entry) {
       setForm({ time: entry.time, med: entry.med, quantity: entry.quantity });
       setEditId(entryId);
+      setIsModalOpen(true);
     }
+  };
+
+  const save = () => {
+    if (!form.time || !form.med || !form.quantity) return;
+    if (editId) {
+      update(editId, form);
+    } else {
+      add(form);
+    }
+    setIsModalOpen(false);
+    setForm({ time: "", med: "", quantity: "" });
   };
 
   return (
     <div>
-      <h3>{editId ? "Edit Medication Entry" : "Add Medication Entry"}</h3>
-      <div style={{ display: "flex", gap: 8 }}>
-        <input
-          type="time"
-          name="time"
-          value={form.time}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="med"
-          placeholder="Medication"
-          value={form.med}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="quantity"
-          placeholder="Quantity"
-          value={form.quantity}
-          onChange={handleChange}
-        />
-        <button onClick={saveEntry}>{editId ? "Update" : "Add"}</button>
+      <button className="medication-add-entry-button" onClick={openNewModal}>
+        + Add Medication
+      </button>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <h3 className="medication-schedule-title">Medication Schedule</h3>
+        {entries.length > 0 && (
+          <button
+            onClick={() => setIsListModalOpen(true)}
+            className="modal-close-button"
+            style={{
+              fontSize: "12px",
+              padding: "3px 5px",
+              border: "1px solid #e4aeb9",
+              borderRadius: "6px",
+              backgroundColor: "#fdedf1ff",
+              color: "#5c4332",
+            }}
+          >
+            📋
+          </button>
+        )}
       </div>
 
-      <h4 style={{ marginTop: 20 }}>Medication Schedule</h4>
-      <ul>
-        {entries
-          .slice()
-          .sort((a, b) => a.time.localeCompare(b.time))
-          .map((entry) => (
-            <li key={entry.id}>
-              {entry.time} — {entry.med} ({entry.quantity})
-              <button
-                onClick={() => editEntry(entry.id)}
-                style={{ marginLeft: 8 }}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => remove(entry.id)}
-                style={{ marginLeft: 4 }}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-      </ul>
+      {entries.length > 0 && (
+        <>
+          <ul className="medication-schedule-list">
+            {entries
+              .slice()
+              .sort((a, b) => a.time.localeCompare(b.time))
+              .map((entry) => (
+                <li key={entry.id} className="medication-schedule-entry">
+                  <span className="medication-time">{entry.time}</span>
+                  <span className="medication-med" title={entry.med}>
+                    {entry.med}
+                  </span>
+                  <span className="medication-quantity">
+                    ({entry.quantity})
+                  </span>
+                  <div className="medication-buttons">
+                    <button
+                      className="icon-button"
+                      onClick={() => startEdit(entry.id)}
+                      title="Edit"
+                      aria-label="Edit entry"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon-pencil"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                      >
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+                      </svg>
+                    </button>
+
+                    <button
+                      className="modal-close-button"
+                      style={{ fontSize: "16px", padding: "2px 6px" }}
+                      onClick={() => remove(entry.id)}
+                      title="Delete"
+                      aria-label="Delete entry"
+                    >
+                      ✖
+                    </button>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </>
+      )}
+
+      {/* Modals */}
+      {isModalOpen && (
+        <MedicationEntryModal
+          form={form}
+          setForm={setForm}
+          onClose={() => setIsModalOpen(false)}
+          onSave={save}
+          isEdit={!!editId}
+        />
+      )}
+
+      {isListModalOpen && (
+        <MedicationListModal
+          entries={entries}
+          onClose={() => setIsListModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
