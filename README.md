@@ -2,7 +2,7 @@
 
 ![ChomChom Logo](https://i.imgur.com/1isMEWh.png)
 
-A delightful pet management application built with React frontend and Flask backend.
+A simple pet management application built with React frontend and Flask backend.
 
 ## Under Construction
 
@@ -23,7 +23,7 @@ This project is currently under active development. Features are being added and
 - **Backend**: Flask (Python)
 - **Styling**: Custom CSS with responsive design
 
-## Getting Started
+## Follow Along
 
 ### Prerequisites
 
@@ -60,8 +60,6 @@ This project is currently under active development. Features are being added and
    flask run
    ```
 
-The backend will be available at `http://localhost:5000`
-
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
@@ -81,8 +79,4 @@ The backend will be available at `http://localhost:5000`
    npm start
    ```
 
-The frontend will be available at `http://localhost:3000`
-
 ---
-
-Made with ❤️ for pets and their humans
