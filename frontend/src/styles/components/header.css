@@ -1,0 +1,30 @@
+/* ===================================
+   Header
+=================================== */
+.header {
+  background-color: #f4e5ce;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header-logo {
+  height: 125px;
+  width: 125px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+
+.header-logo:hover {
+  transform: scale(1.15);
+}
+
+.header-tagline {
+  font-style: italic;
+  color: #5c4332;
+  font-size: 1rem;
+}

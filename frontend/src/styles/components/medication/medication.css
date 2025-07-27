@@ -1,0 +1,106 @@
+/* ===================================
+   Medication Schedule
+=================================== */
+.medication-add-entry-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  color: #5c4332;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s ease;
+  background-color: #f7e1e6;
+  border: 2px solid #e4aeb9;
+}
+
+.medication-add-entry-button:hover {
+  transform: scale(1.03);
+  background-color: #f0bec7;
+}
+
+/* Medication List Styles */
+.medication-schedule-title {
+  font-size: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #5c4332;
+}
+
+.medication-schedule-list {
+  border: 2px solid #e4aeb9;
+  background-color: #f7e1e6;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  font-family: "Patrick Hand", cursive;
+  font-size: 14px;
+}
+
+.modal-content .medication-schedule-list {
+  min-width: 300px;
+}
+
+.medication-schedule-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  border-bottom: 2px dashed #e4aeb9;
+}
+
+.medication-schedule-entry:last-child {
+  border-bottom: none;
+}
+
+.medication-time,
+.medication-med,
+.medication-quantity {
+  margin-right: 5px;
+}
+
+.medication-time {
+  font-weight: bold;
+  min-width: 55px;
+  flex-shrink: 0;
+}
+
+.medication-med {
+  flex-grow: 1;
+  min-width: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.medication-quantity {
+  width: 40px;
+  color: #777;
+  font-size: 12px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.medication-buttons {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.medication-buttons button {
+  font-size: 12px;
+  border: none;
+  color: #5c4332;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #f7e1e6;
+}
+
+.medication-buttons button:hover {
+  background-color: #e4aeb9;
+}

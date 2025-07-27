@@ -1,0 +1,141 @@
+/* ===================================
+   Feeding Schedule
+=================================== */
+.feeding-add-entry-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  color: #5c4332;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s ease;
+  background-color: #fff5c1;
+  border: 2px solid #e7d968;
+}
+
+.feeding-add-entry-button:hover {
+  transform: scale(1.03);
+  background-color: #f5e891;
+}
+
+/* Feeding List Styles */
+.feeding-schedule-title {
+  font-size: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #5c4332;
+}
+
+.feeding-schedule-list {
+  border: 2px solid #e7d968;
+  background-color: #fff5c1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  font-family: "Patrick Hand", cursive;
+  font-size: 14px;
+}
+
+.modal-content .feeding-schedule-list {
+  min-width: 300px;
+}
+
+.feeding-schedule-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+  border-bottom: 2px dashed #e7d968;
+}
+
+.feeding-schedule-entry:last-child {
+  border-bottom: none;
+}
+
+.feeding-time,
+.feeding-food,
+.feeding-quantity {
+  margin-right: 5px;
+}
+
+.feeding-time {
+  font-weight: bold;
+  min-width: 55px;
+  flex-shrink: 0;
+}
+
+.feeding-food {
+  flex-grow: 1;
+  min-width: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feeding-quantity {
+  width: 40px;
+  color: #777;
+  font-size: 12px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.feeding-buttons {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.feeding-buttons button {
+  font-size: 12px;
+  border: none;
+  color: #5c4332;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #fff5c1;
+}
+
+.feeding-buttons button:hover {
+  background-color: #e7d968;
+}
+
+/* Quantity Input Combo */
+.quantity-combo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quantity-combo input {
+  flex: 2;
+  min-width: 0;
+}
+
+.unit-dropdown {
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  border: 2px solid #cbeed7;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #5c4332;
+  font-family: "Nunito", sans-serif;
+}
+
+.icon-pencil {
+  display: inline-block;
+  vertical-align: middle;
+  color: #5c4332;
+  transition: transform 0.15s ease;
+}
+
+.icon-button:hover .icon-pencil {
+  transform: scale(1.2);
+  color: #a15555;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Vaccination } from "../../features/vet/Vaccination";
-import VaccinationEntryModal from "./VaccinationEntryModal";
+import VaccinationEntryModal from "../modals/VaccinationEntryModal";
 
 export default function VaccinationsSection({
   vaccinations,

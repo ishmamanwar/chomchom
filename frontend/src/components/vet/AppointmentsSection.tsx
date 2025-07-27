@@ -2,7 +2,7 @@ import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Appointment } from "../../features/vet/Appointment";
-import AppointmentModal from "./AppointmentModal";
+import AppointmentModal from "../modals/AppointmentModal";
 
 export default function AppointmentsSection({
   appointments,

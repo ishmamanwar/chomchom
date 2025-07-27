@@ -1,0 +1,100 @@
+/* ===================================
+   Pet Grid
+=================================== */
+.pet-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+/* ===================================
+   Pet Card
+=================================== */
+.pet-card {
+  background-color: #fff5e6;
+  border-radius: 12px;
+  padding: 16px;
+  width: 133.5px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: 2px solid #b9eac9;
+}
+
+.pet-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #cbeed7;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.pet-card h3 {
+  font-size: 16px;
+  color: #5c4332;
+  margin: 6px 0 2px;
+}
+
+.pet-card p {
+  font-size: 14px;
+  color: #6d4c3d;
+  margin: 2px 0;
+}
+
+.pet-card .sound {
+  font-style: italic;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8e5d52;
+  margin-top: 4px;
+}
+
+.pet-card .remove-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  color: #a15555;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.pet-card .remove-button:hover {
+  background-color: #ffdada;
+}
+
+/* ===================================
+   Add Pet Button
+=================================== */
+.add-pet-button-as-card {
+  width: 170.5px;
+  height: 200px;
+  font-size: 50px;
+  background-color: #e0f3e6;
+  color: #4d3e2a;
+  border: 2px dashed #b9eac9;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.add-pet-button-as-card:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,89 @@
+/* ===================================
+   Responsive
+=================================== */
+@media (max-width: 400px) {
+  .pet-card {
+    width: 121.5px;
+  }
+  .add-pet-button-as-card {
+    width: 158.5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pet-overview-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .feeding-schedule-title,
+  .medication-schedule-title,
+  .vet-schedule-title,
+  .vet-vaccination-title {
+    font-size: 18px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    color: #5c4332;
+  }
+
+  .feeding-schedule-list,
+  .medication-schedule-list,
+  .vet-schedule-list,
+  .vet-vaccination-list {
+    font-size: 12px;
+  }
+
+  .feeding-schedule-entry,
+  .medication-schedule-entry,
+  .vet-schedule-entry,
+  .vet-vaccination-entry {
+    grid-template-columns: auto auto 1fr auto;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .feeding-time,
+  .medication-time,
+  .vet-time,
+  .vet-vaccination-date {
+    min-width: 30px;
+  }
+
+  .feeding-buttons button,
+  .medication-buttons button,
+  .vet-buttons button,
+  .vet-vaccination-buttons button {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .feeding-food,
+  .medication-med {
+    flex-basis: 100%;
+  }
+
+  .feeding-quantity,
+  .medication-quantity {
+    text-align: left;
+    width: auto;
+    font-size: 12px;
+  }
+
+  /* Vet Calendar Mobile Styles */
+  .react-calendar__navigation__label {
+    font-size: 14px !important;
+  }
+
+  .react-calendar__navigation button {
+    font-size: 12px !important;
+    padding: 2px 4px !important;
+  }
+
+  .react-calendar__tile {
+    font-size: 12px !important;
+    padding: 4px !important;
+    min-height: 32px !important;
+  }
+}

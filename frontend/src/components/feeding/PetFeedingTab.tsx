@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useFeeding } from "../../features/feeding/hooks";
 import { useState } from "react";
-import FeedingEntryModal from "./FeedingEntryModal";
-import FeedingListModal from "./FeedingListModal";
+import FeedingEntryModal from "../modals/FeedingEntryModal";
+import FeedingListModal from "../modals/FeedingListModal";
 
 export default function PetFeedingTab() {
   const { id: petId } = useParams<{ id: string }>();

@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useMedication } from "../../features/medications/hooks";
-import MedicationEntryModal from "./MedicationEntryModal";
-import MedicationListModal from "./MedicationListModal";
+import MedicationEntryModal from "../modals/MedicationEntryModal";
+import MedicationListModal from "../modals/MedicationListModal";
 
 export default function PetMedicationTab() {
   const { id: petId } = useParams<{ id: string }>();

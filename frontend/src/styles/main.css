@@ -1,0 +1,18 @@
+/* ===================================
+   Main CSS - Import all styles
+=================================== */
+
+/* Base styles */
+@import "./base.css";
+
+/* Component styles */
+@import "./components/header.css";
+@import "./components/modals/modals.css";
+@import "./components/pets/pets.css";
+@import "./components/pets/pet-details.css";
+@import "./components/feeding/feeding.css";
+@import "./components/medication/medication.css";
+@import "./components/vet/vet.css";
+
+/* Responsive styles */
+@import "./responsive.css";

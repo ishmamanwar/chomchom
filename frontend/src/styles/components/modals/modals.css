@@ -1,0 +1,202 @@
+/* ===================================
+   Modal
+=================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff5e6;
+  margin: 0 12px;
+  padding: 10px 12px 30px;
+  border-radius: 12px;
+  min-width: 300px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: bounceIn 0.4s ease;
+}
+
+/* Modal Header & Title */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 22px;
+  color: #5c4332;
+}
+
+.modal-title {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.modal-close-button {
+  background: none;
+  padding-bottom: 20px;
+  padding-right: 0;
+  border: none;
+  font-size: 18px;
+  color: #a15555;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-close-button:hover {
+  transform: scale(1.2);
+  color: #6d1d1d;
+}
+
+/* Modal Inputs & Labels */
+.modal-label {
+  color: #5c4332;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 14px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #cbeed7;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  color: #5c4332;
+  margin-top: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.modal-input.error {
+  border-color: #ffb3b3;
+  background-color: #fff8f8;
+}
+
+.modal-input.error:focus {
+  border-color: #ff9999;
+  outline: none;
+}
+
+.validation-error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 2px;
+  font-family: "Nunito", sans-serif;
+  font-style: italic;
+}
+
+/* Modal Preview */
+.modal-preview-container {
+  margin-top: 8px;
+}
+
+.modal-preview-img {
+  max-width: 150px;
+  border-radius: 8px;
+}
+
+/* Modal Button Container */
+.modal-button-container {
+  margin-top: 16px;
+}
+
+.modal-save-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #b9eac9;
+  color: #4d3e2a;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-save-button:hover {
+  background-color: #a3d8b4;
+}
+
+.modal-cancel-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  color: #5c4332;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 8px;
+}
+
+.modal-cancel-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Feeding / Medication Modal Styles */
+.feeding-modal .modal-content {
+  background-color: #fff5c1;
+  border-color: #e7d968;
+}
+
+.medication-modal .modal-content {
+  background-color: #f7e1e6;
+  border-color: #e4aeb9;
+}
+
+.feeding-modal .modal-input-group,
+.medication-modal .modal-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.feeding-modal .modal-input.short,
+.medication-modal .modal-input.short {
+  flex: 1;
+  min-width: 0;
+}
+
+.feeding-modal .feeding-quantity,
+.medication-modal .medication-quantity {
+  width: 60px;
+}
+
+/* Vet Modal Styles */
+.vet-modal .modal-content {
+  background-color: #cef0f5;
+  border-color: #87d0dd;
+}
+
+.vet-modal .modal-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.vet-modal .modal-input.short {
+  flex: 1;
+  min-width: 0;
+}
