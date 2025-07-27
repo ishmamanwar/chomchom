@@ -1,4 +1,6 @@
-/* ========== Animations ========== */
+/* ===================================
+   Animations
+=================================== */
 @keyframes bounceIn {
   0% {
     transform: scale(0.95);
@@ -16,7 +18,9 @@
   }
 }
 
-/* ========== Global Styles ========== */
+/* ===================================
+   Global Styles
+=================================== */
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
@@ -42,7 +46,9 @@ body::before {
   pointer-events: none;
 }
 
-/* ========== Layout Containers ========== */
+/* ===================================
+   Layout Containers
+=================================== */
 .centered-layout {
   display: flex;
   justify-content: center;
@@ -62,7 +68,9 @@ body::before {
   text-align: left;
 }
 
-/* ========== Header ========== */
+/* ===================================
+   Header
+=================================== */
 .header {
   background-color: #f4e5ce;
 }
@@ -91,7 +99,9 @@ body::before {
   font-size: 1rem;
 }
 
-/* ========== Pet Grid ========== */
+/* ===================================
+   Pet Grid
+=================================== */
 .pet-grid {
   display: flex;
   gap: 12px;
@@ -100,7 +110,9 @@ body::before {
   margin-top: 8px;
 }
 
-/* ========== Pet Card ========== */
+/* ===================================
+   Pet Card
+=================================== */
 .pet-card {
   background-color: #fff5e6;
   border-radius: 12px;
@@ -165,7 +177,9 @@ body::before {
   background-color: #ffdada;
 }
 
-/* ========== Add Pet Button ========== */
+/* ===================================
+   Add Pet Button
+=================================== */
 .add-pet-button-as-card {
   width: 170.5px;
   height: 200px;
@@ -186,7 +200,9 @@ body::before {
   transform: scale(1.05);
 }
 
-/* ========== Modal ========== */
+/* ===================================
+   Modal
+=================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -213,6 +229,7 @@ body::before {
   animation: bounceIn 0.4s ease;
 }
 
+/* Modal Header & Title */
 .modal-header {
   display: flex;
   align-items: center;
@@ -246,6 +263,7 @@ body::before {
   color: #6d1d1d;
 }
 
+/* Modal Inputs & Labels */
 .modal-label {
   color: #5c4332;
   font-weight: 600;
@@ -268,6 +286,7 @@ body::before {
   box-sizing: border-box;
 }
 
+/* Modal Preview */
 .modal-preview-container {
   margin-top: 8px;
 }
@@ -277,6 +296,7 @@ body::before {
   border-radius: 8px;
 }
 
+/* Modal Button Container */
 .modal-button-container {
   margin-top: 16px;
 }
@@ -298,8 +318,9 @@ body::before {
   background-color: #a3d8b4;
 }
 
-/* ========== Pet Details ========== */
-
+/* ===================================
+   Pet Details Tabs
+=================================== */
 .pet-details-container {
   padding: 0 16px;
 }
@@ -361,28 +382,27 @@ body::before {
   border: 2px solid transparent;
 }
 
+/* Tab Active Borders */
 .pet-tab-content.overview-content,
 .pet-tab-new.active.tab-overview {
   border-color: #a0d3b8;
 }
-
 .pet-tab-content.feeding-content,
 .pet-tab-new.active.tab-feeding {
   border-color: #e7d968;
 }
-
 .pet-tab-content.medication-content,
 .pet-tab-new.active.tab-medication {
   border-color: #e4aeb9;
 }
-
 .pet-tab-content.vet-content,
 .pet-tab-new.active.tab-vet {
   border-color: #87d0dd;
 }
 
-/* ========== Pet Overview ========== */
-
+/* ===================================
+   Pet Overview (Details Page)
+=================================== */
 .pet-overview-container {
   display: flex;
   gap: 45px;
@@ -440,6 +460,9 @@ body::before {
   font-size: 17px;
 }
 
+/* ===================================
+   Feeding Schedule
+=================================== */
 .add-entry-button {
   padding: 8px 16px;
   font-size: 14px;
@@ -457,6 +480,7 @@ body::before {
   transform: scale(1.03);
 }
 
+/* Feeding Modal Styles */
 .feeding-modal .modal-content {
   background-color: #fff5c1;
   border-color: #e7d968;
@@ -474,6 +498,7 @@ body::before {
   min-width: 0;
 }
 
+/* Quantity Input Combo */
 .quantity-combo {
   display: flex;
   align-items: center;
@@ -496,6 +521,7 @@ body::before {
   font-family: "Nunito", sans-serif;
 }
 
+/* Feeding List Styles */
 .feeding-schedule-title {
   font-size: 20px;
   margin-top: 12px;
@@ -563,6 +589,7 @@ body::before {
   margin-left: 8px;
   flex-shrink: 0;
 }
+
 .feeding-buttons button {
   font-size: 12px;
   border: none;
@@ -589,15 +616,19 @@ body::before {
   color: #a15555;
 }
 
-@media (max-width: 600px) {
+/* ===================================
+   Responsive
+=================================== */
+@media (max-width: 400px) {
   .pet-card {
     width: 121.5px;
   }
-
   .add-pet-button-as-card {
     width: 158.5px;
   }
+}
 
+@media (max-width: 600px) {
   .pet-overview-container {
     flex-direction: column;
     align-items: center;
@@ -615,6 +646,7 @@ body::before {
   .feeding-schedule-list {
     font-size: 12px;
   }
+
   .feeding-schedule-entry {
     grid-template-columns: auto auto 1fr auto;
     font-size: 12px;
