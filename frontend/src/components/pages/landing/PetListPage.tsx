@@ -47,13 +47,15 @@ export default function PetListPage() {
               onEdit={handleEdit}
             />
           ))}
-          <button
-            className="add-pet-button-as-card"
-            onClick={() => setIsModalOpen(true)}
-            aria-label="Add new pet"
-          >
-            +
-          </button>
+          {pets.length < 10 && (
+            <button
+              className="add-pet-button-as-card"
+              onClick={() => setIsModalOpen(true)}
+              aria-label="Add new pet"
+            >
+              +
+            </button>
+          )}
         </div>
       </div>
 
