@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function VaccinationEntryModal({
   form,
@@ -13,17 +13,41 @@ export default function VaccinationEntryModal({
   onSave: () => void;
   isEdit: boolean;
 }) {
+  const [errors, setErrors] = useState<{ name?: string; date?: string }>({});
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setForm((prev: { name: string; date: string }) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: { name?: string; date?: string } = {};
+
+    if (!form.name.trim()) {
+      newErrors.name = "* Required";
+    }
+
+    if (!form.date) {
+      newErrors.date = "* Required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.date) return;
-    onSave();
+    if (validateForm()) {
+      onSave();
+    }
   };
 
   return (
@@ -47,10 +71,12 @@ export default function VaccinationEntryModal({
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                className="modal-input short"
+                className={`modal-input short ${errors.name ? "error" : ""}`}
                 placeholder="e.g., Rabies, Distemper, etc."
-                required
               />
+              {errors.name && (
+                <div className="validation-error">{errors.name}</div>
+              )}
             </div>
 
             <div style={{ flex: 1 }}>
@@ -60,9 +86,11 @@ export default function VaccinationEntryModal({
                 name="date"
                 value={form.date}
                 onChange={handleChange}
-                className="modal-input short"
-                required
+                className={`modal-input short ${errors.date ? "error" : ""}`}
               />
+              {errors.date && (
+                <div className="validation-error">{errors.date}</div>
+              )}
             </div>
           </div>
 

@@ -21,6 +21,7 @@ export default function AppointmentModal({
   setEditId: (id: string | null) => void;
 }) {
   const [time, setTime] = React.useState("");
+  const [timeError, setTimeError] = React.useState<string>("");
 
   const dateStr = selectedDate.toISOString().split("T")[0];
   const dateAppointments = appointments.filter((appt) => appt.date === dateStr);
@@ -39,7 +40,13 @@ export default function AppointmentModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!time) return;
+
+    if (!time.trim()) {
+      setTimeError("* Required");
+      return;
+    }
+
+    setTimeError("");
 
     if (editId) {
       onUpdate(editId, { date: dateStr, time });
@@ -53,11 +60,13 @@ export default function AppointmentModal({
   const startEdit = (appointment: Appointment) => {
     setTime(appointment.time);
     setEditId(appointment.id);
+    setTimeError("");
   };
 
   const cancelEdit = () => {
     setEditId(null);
     setTime("");
+    setTimeError("");
   };
 
   return (
@@ -76,10 +85,13 @@ export default function AppointmentModal({
             <input
               type="time"
               value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="modal-input"
-              required
+              onChange={(e) => {
+                setTime(e.target.value);
+                if (timeError) setTimeError("");
+              }}
+              className={`modal-input ${timeError ? "error" : ""}`}
             />
+            {timeError && <div className="validation-error">{timeError}</div>}
           </div>
 
           <div

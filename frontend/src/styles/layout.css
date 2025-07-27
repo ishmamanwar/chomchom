@@ -284,6 +284,25 @@ body::before {
   color: #5c4332;
   margin-top: 4px;
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.modal-input.error {
+  border-color: #ffb3b3;
+  background-color: #fff8f8;
+}
+
+.modal-input.error:focus {
+  border-color: #ff9999;
+  outline: none;
+}
+
+.validation-error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 2px;
+  font-family: "Nunito", sans-serif;
+  font-style: italic;
 }
 
 /* Modal Preview */

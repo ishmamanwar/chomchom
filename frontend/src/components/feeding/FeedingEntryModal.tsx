@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const unitOptions = ["g", "mg", "ml", "can", "pk"];
 
@@ -15,10 +15,22 @@ export default function FeedingEntryModal({
   onSave: () => void;
   isEdit: boolean;
 }) {
+  const [errors, setErrors] = useState<{
+    time?: string;
+    food?: string;
+    quantity?: string;
+  }>({});
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
   };
 
   return (
@@ -41,9 +53,11 @@ export default function FeedingEntryModal({
               name="time"
               value={form.time}
               onChange={handleChange}
-              className="modal-input short"
-              required
+              className={`modal-input short ${errors.time ? "error" : ""}`}
             />
+            {errors.time && (
+              <div className="validation-error">{errors.time}</div>
+            )}
           </div>
 
           <div style={{ flex: 1 }}>
@@ -61,9 +75,13 @@ export default function FeedingEntryModal({
                     ...prev,
                     quantity: currentUnit ? `${value} ${currentUnit}` : value,
                   }));
+                  if (errors.quantity) {
+                    setErrors((prev) => ({ ...prev, quantity: undefined }));
+                  }
                 }}
-                className="modal-input short"
-                required
+                className={`modal-input short ${
+                  errors.quantity ? "error" : ""
+                }`}
               />
               <select
                 className="unit-dropdown"
@@ -86,6 +104,9 @@ export default function FeedingEntryModal({
                 ))}
               </select>
             </div>
+            {errors.quantity && (
+              <div className="validation-error">{errors.quantity}</div>
+            )}
           </div>
         </div>
 
@@ -96,13 +117,41 @@ export default function FeedingEntryModal({
             name="food"
             value={form.food}
             onChange={handleChange}
-            className="modal-input"
-            required
+            className={`modal-input ${errors.food ? "error" : ""}`}
           />
+          {errors.food && <div className="validation-error">{errors.food}</div>}
         </div>
 
         <div className="modal-button-container">
-          <button className="modal-save-button" onClick={onSave}>
+          <button
+            className="modal-save-button"
+            onClick={(e) => {
+              e.preventDefault();
+              const newErrors: {
+                time?: string;
+                food?: string;
+                quantity?: string;
+              } = {};
+
+              if (!form.time.trim()) {
+                newErrors.time = "* Required";
+              }
+
+              if (!form.food.trim()) {
+                newErrors.food = "* Required";
+              }
+
+              if (!form.quantity.trim()) {
+                newErrors.quantity = "* Required";
+              }
+
+              setErrors(newErrors);
+
+              if (Object.keys(newErrors).length === 0) {
+                onSave();
+              }
+            }}
+          >
             {isEdit ? "Update" : "Add"}
           </button>
         </div>
