@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePets } from "../../../features/pets/hooks";
 import PetCard from "./PetCard";
 import PetModal from "./PetModal";
-import { Pet } from "../../../features/pets/type";
+import { Pet } from "../../../features/pets/Pet";
 
 export default function PetListPage() {
   const { pets, addPet, removePet } = usePets();

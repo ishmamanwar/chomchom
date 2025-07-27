@@ -122,7 +122,6 @@ export default function PetMedicationTab() {
         </>
       )}
 
-      {/* Modals */}
       {isModalOpen && (
         <MedicationEntryModal
           form={form}

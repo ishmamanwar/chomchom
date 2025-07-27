@@ -1,4 +1,4 @@
-import { Pet } from "../../features/pets/type";
+import { Pet } from "../../features/pets/Pet";
 import { differenceInMonths, parseISO } from "date-fns";
 
 interface Props {

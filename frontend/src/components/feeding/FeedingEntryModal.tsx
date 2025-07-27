@@ -42,6 +42,7 @@ export default function FeedingEntryModal({
               value={form.time}
               onChange={handleChange}
               className="modal-input short"
+              required
             />
           </div>
 
@@ -62,6 +63,7 @@ export default function FeedingEntryModal({
                   }));
                 }}
                 className="modal-input short"
+                required
               />
               <select
                 className="unit-dropdown"
@@ -95,6 +97,7 @@ export default function FeedingEntryModal({
             value={form.food}
             onChange={handleChange}
             className="modal-input"
+            required
           />
         </div>
 

@@ -63,7 +63,7 @@ export default function PetFeedingTab() {
               padding: "3px 5px",
               border: "1px solid #e7d968",
               borderRadius: "6px",
-              backgroundColor: "#fffbe6",
+              backgroundColor: "#fff5c1",
               color: "#5c4332",
             }}
           >

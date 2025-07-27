@@ -221,7 +221,7 @@ body::before {
   margin: 0 12px;
   padding: 10px 12px 30px;
   border-radius: 12px;
-  width: 400px;
+  min-width: 300px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -316,6 +316,24 @@ body::before {
 
 .modal-save-button:hover {
   background-color: #a3d8b4;
+}
+
+.modal-cancel-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  color: #5c4332;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 8px;
+}
+
+.modal-cancel-button:hover {
+  background-color: #e0e0e0;
 }
 
 /* ===================================
@@ -690,6 +708,332 @@ body::before {
 }
 
 /* ===================================
+   Vet Tab Styles
+=================================== */
+
+/* Vet Calendar Container */
+.vet-calendar-container {
+  background-color: #cef0f5;
+  border: 2px solid #87d0dd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.vet-calendar-title {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: #5c4332;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Vet Calendar Styling */
+.react-calendar {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff5e6;
+  border: 2px solid #87d0dd;
+  border-radius: 12px;
+  font-family: "Nunito", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.react-calendar__navigation {
+  background-color: #87d0dd;
+  border-radius: 10px 10px 0 0;
+  padding: 8px;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #4d3e2a;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: #6bb8c5;
+}
+
+.react-calendar__navigation button:disabled {
+  color: #a0a0a0;
+}
+
+.react-calendar__month-view__weekdays {
+  background-color: #b9e5ec;
+  padding: 8px 0;
+  font-weight: bold;
+  color: #4d3e2a;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.react-calendar__month-view__days {
+  background-color: #fff5e6;
+}
+
+.react-calendar__tile {
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  color: #5c4332;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 2px;
+  position: relative;
+  transition: all 0.2s;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-calendar__tile:hover {
+  background-color: #e0f3f7;
+  transform: scale(1.05);
+}
+
+.react-calendar__tile--active {
+  background-color: #87d0dd !important;
+  color: #4d3e2a;
+  font-weight: bold;
+}
+
+.react-calendar__tile--now {
+  background-color: #b9e5ec;
+  font-weight: bold;
+}
+
+/* Appointment indicator circles */
+.react-calendar__tile.has-appointment {
+  position: relative;
+}
+
+.react-calendar__tile.has-appointment::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border: 2px solid #a0a0a0;
+  border-radius: 50%;
+  background-color: transparent;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.react-calendar__tile.has-appointment::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  border-radius: 50%;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Adjacent month dates styling */
+.react-calendar__tile--neighboringMonth {
+  color: #a0a0a0 !important;
+  opacity: 0.6;
+}
+
+.react-calendar__tile--neighboringMonth:hover {
+  background-color: #f0f0f0 !important;
+}
+
+/* Vet Modal Styles */
+.vet-modal .modal-content {
+  background-color: #cef0f5;
+  border-color: #87d0dd;
+}
+
+.vet-modal .modal-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.vet-modal .modal-input.short {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Vet Schedule List Styles */
+.vet-schedule-title {
+  font-size: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #5c4332;
+}
+
+.vet-schedule-list {
+  border: 2px solid #87d0dd;
+  background-color: #cef0f5;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  font-family: "Patrick Hand", cursive;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.vet-schedule-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  line-height: 1.4;
+  border-bottom: 2px dashed #87d0dd;
+}
+
+.vet-schedule-entry:last-child {
+  border-bottom: none;
+}
+
+.vet-time {
+  font-weight: bold;
+  min-width: 55px;
+  flex-shrink: 0;
+  color: #4d3e2a;
+}
+
+.vet-buttons {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.vet-buttons button {
+  font-size: 12px;
+  border: none;
+  color: #5c4332;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #cef0f5;
+}
+
+.vet-buttons button:hover {
+  background-color: #87d0dd;
+}
+
+/* Vet Vaccination Styles */
+.vet-add-vaccination-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  color: #5c4332;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s ease;
+  background-color: #cef0f5;
+  border: 2px solid #87d0dd;
+}
+
+.vet-add-vaccination-button:hover {
+  transform: scale(1.03);
+  background-color: #b9e5ec;
+}
+
+.vet-vaccination-title {
+  font-size: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: #5c4332;
+}
+
+.vet-vaccination-list {
+  border: 2px solid #87d0dd;
+  background-color: #cef0f5;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  font-family: "Patrick Hand", cursive;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.vet-vaccination-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  line-height: 1.4;
+  border-bottom: 2px dashed #87d0dd;
+}
+
+.vet-vaccination-entry:last-child {
+  border-bottom: none;
+}
+
+.vet-vaccination-date {
+  font-weight: bold;
+  min-width: 80px;
+  flex-shrink: 0;
+  color: #4d3e2a;
+}
+
+.vet-vaccination-name {
+  flex-grow: 1;
+  min-width: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vet-vaccination-buttons {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.vet-vaccination-buttons button {
+  font-size: 12px;
+  border: none;
+  color: #5c4332;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #cef0f5;
+}
+
+.vet-vaccination-buttons button:hover {
+  background-color: #87d0dd;
+}
+
+/* ===================================
    Responsive
 =================================== */
 @media (max-width: 400px) {
@@ -710,7 +1054,9 @@ body::before {
   }
 
   .feeding-schedule-title,
-  .medication-schedule-title {
+  .medication-schedule-title,
+  .vet-schedule-title,
+  .vet-vaccination-title {
     font-size: 18px;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -718,24 +1064,32 @@ body::before {
   }
 
   .feeding-schedule-list,
-  .medication-schedule-list {
+  .medication-schedule-list,
+  .vet-schedule-list,
+  .vet-vaccination-list {
     font-size: 12px;
   }
 
   .feeding-schedule-entry,
-  .medication-schedule-entry {
+  .medication-schedule-entry,
+  .vet-schedule-entry,
+  .vet-vaccination-entry {
     grid-template-columns: auto auto 1fr auto;
     font-size: 12px;
     padding: 8px;
   }
 
   .feeding-time,
-  .medication-time {
+  .medication-time,
+  .vet-time,
+  .vet-vaccination-date {
     min-width: 30px;
   }
 
   .feeding-buttons button,
-  .medication-buttons button {
+  .medication-buttons button,
+  .vet-buttons button,
+  .vet-vaccination-buttons button {
     font-size: 11px;
     padding: 2px 6px;
   }
@@ -750,5 +1104,21 @@ body::before {
     text-align: left;
     width: auto;
     font-size: 12px;
+  }
+
+  /* Vet Calendar Mobile Styles */
+  .react-calendar__navigation__label {
+    font-size: 14px !important;
+  }
+
+  .react-calendar__navigation button {
+    font-size: 12px !important;
+    padding: 2px 4px !important;
+  }
+
+  .react-calendar__tile {
+    font-size: 12px !important;
+    padding: 4px !important;
+    min-height: 32px !important;
   }
 }
