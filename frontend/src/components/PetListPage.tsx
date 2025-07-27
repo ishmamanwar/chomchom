@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { usePets } from "../hooks";
-import PetCard from "../../../components/PetCard";
-import PetModal from "../../../components/PetModal";
-import { Pet } from "../../../features/pets/types";
+import { usePets } from "../features/pets/hooks";
+import PetCard from "./PetCard";
+import PetModal from "./PetModal";
+import { Pet } from "../features/pets/type";
 
 export default function PetListPage() {
   const { pets, addPet, removePet } = usePets();
