@@ -10,21 +10,16 @@ def get_feeding(pet_id):
 @feeding_bp.route("", methods=["POST"])
 def post_feeding(pet_id):
     data = request.json
-    new_entry = feeding_store.add_entry(
-        pet_id,
-        time=data["time"],
-        food=data["food"],
-        quantity=data["quantity"]
-    )
+    new_entry = feeding_store.add_entry(pet_id, data)
     return jsonify(new_entry), 201
 
 @feeding_bp.route("/<entry_id>", methods=["PUT"])
 def put_feeding(pet_id, entry_id):
     data = request.json
-    feeding_store.update_entry(entry_id, pet_id, data)
+    feeding_store.update_entry(pet_id, entry_id, data)
     return "", 204
 
 @feeding_bp.route("/<entry_id>", methods=["DELETE"])
 def delete_feeding(pet_id, entry_id):
-    feeding_store.delete_entry(entry_id, pet_id)
+    feeding_store.delete_entry(pet_id, entry_id)
     return "", 204

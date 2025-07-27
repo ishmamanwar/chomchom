@@ -12,33 +12,33 @@ def load_feeding_entries():
         return json.load(f)
 
 
-def save_feeding_entries(entries):
+def save_feeding_entries(data):
     with open(DATA_FILE, "w") as f:
-        json.dump(entries, f, indent=2)
+        json.dump(data, f, indent=2)
 
 
 def get_entries_for_pet(pet_id):
     return [e for e in load_feeding_entries() if e["pet_id"] == pet_id]
 
 
-def add_entry(pet_id, time, food, quantity):
-    entries = load_feeding_entries()
-    new_entry = FeedingEntry(pet_id, time, food, quantity)
-    entries.append(new_entry.to_dict())
-    save_feeding_entries(entries)
-    return new_entry.to_dict()
+def add_entry(pet_id, data):
+    entry = FeedingEntry(pet_id, data["time"], data["food"], data["quantity"])
+    all_data = load_feeding_entries()
+    all_data.append(entry.to_dict())
+    save_feeding_entries(all_data)
+    return entry.to_dict()
 
 
-def update_entry(entry_id, pet_id, updated):
-    entries = load_feeding_entries()
-    for e in entries:
+def update_entry(pet_id, entry_id, updated):
+    data = load_feeding_entries()
+    for e in data:
         if e["id"] == entry_id and e["pet_id"] == pet_id:
             e.update(updated)
             break
-    save_feeding_entries(entries)
+    save_feeding_entries(data)
 
 
-def delete_entry(entry_id, pet_id):
-    entries = load_feeding_entries()
-    entries = [e for e in entries if not (e["id"] == entry_id and e["pet_id"] == pet_id)]
-    save_feeding_entries(entries)
+def delete_entry(pet_id, entry_id):
+    data = load_feeding_entries()
+    data = [e for e in data if not (e["id"] == entry_id and e["pet_id"] == pet_id)]
+    save_feeding_entries(data)

@@ -1,23 +1,18 @@
 import uuid
-from dataclasses import dataclass, asdict
 
-@dataclass
 class FeedingEntry:
-    id: str
-    pet_id: str
-    time: str
-    food: str
-    quantity: str
+    def __init__(self, pet_id, time, food, quantity, id=None):
+        self.id = id or str(uuid.uuid4())
+        self.pet_id = pet_id
+        self.time = time
+        self.food = food
+        self.quantity = quantity
 
     def to_dict(self):
-        return asdict(self)
-
-    @staticmethod
-    def from_dict(data):
-        return FeedingEntry(
-            id=data.get("id") or str(uuid.uuid4()),
-            pet_id=data["pet_id"],
-            time=data["time"],
-            food=data["food"],
-            quantity=data["quantity"],
-        )
+        return {
+            "id": self.id,
+            "pet_id": self.pet_id,
+            "time": self.time,
+            "food": self.food,
+            "quantity": self.quantity,
+        }
