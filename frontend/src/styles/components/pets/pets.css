@@ -60,6 +60,24 @@
   margin-top: 4px;
 }
 
+.pet-card .edit-button {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  color: #5c4332;
+  transition: transform 0.2s, color 0.2s;
+  padding: 2px;
+}
+
+.pet-card .edit-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
 .pet-card .remove-button {
   position: absolute;
   top: 8px;
@@ -81,7 +99,7 @@
 =================================== */
 .add-pet-button-as-card {
   width: 170.5px;
-  height: 200px;
+  height: 206px;
   font-size: 50px;
   background-color: #e0f3e6;
   color: #4d3e2a;

@@ -44,6 +44,25 @@ def add_pet():
     save_pets(pets)
     return jsonify(new_pet.to_dict()), 201
 
+@pets_bp.route("/<pet_id>", methods=["PUT"])
+def update_pet(pet_id):
+    pets = load_pets()
+    pet_to_update = next((pet for pet in pets if pet["id"] == pet_id), None)
+
+    if not pet_to_update:
+        return jsonify({"error": "Pet not found"}), 404
+
+    data = request.json
+    
+    # Update the pet with new data
+    pet_to_update["name"] = data["name"]
+    pet_to_update["type"] = data["type"]
+    pet_to_update["birthDate"] = data["birthDate"]
+    pet_to_update["imageUrl"] = data.get("imageUrl", "")
+
+    save_pets(pets)
+    return jsonify(pet_to_update)
+
 @pets_bp.route("/<pet_id>", methods=["DELETE"])
 def delete_pet(pet_id):
     pets = load_pets()

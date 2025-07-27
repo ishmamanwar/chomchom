@@ -32,10 +32,22 @@ export function usePets() {
       .catch((error) => console.error("Failed to delete pet", error));
   };
 
+  const updatePet = (id: string, petData: Omit<Pet, "id">) => {
+    axios
+      .put<Pet>(`${API_BASE_URL}/pets/${id}`, petData)
+      .then((response) => {
+        setPets((prev) =>
+          prev.map((pet) => (pet.id === id ? response.data : pet))
+        );
+      })
+      .catch((error) => console.error("Failed to update pet", error));
+  };
+
   return {
     pets,
     addPet,
     removePet,
+    updatePet,
   };
 }
 

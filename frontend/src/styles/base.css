@@ -1,6 +1,3 @@
-/* ===================================
-   Animations
-=================================== */
 @keyframes bounceIn {
   0% {
     transform: scale(0.95);
@@ -18,9 +15,6 @@
   }
 }
 
-/* ===================================
-   Global Styles
-=================================== */
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
@@ -46,9 +40,6 @@ body::before {
   pointer-events: none;
 }
 
-/* ===================================
-   Layout Containers
-=================================== */
 .centered-layout {
   display: flex;
   justify-content: center;

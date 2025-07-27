@@ -14,17 +14,17 @@
     "imageUrl": "http://127.0.0.1:5000/uploads/pexels-pixabay-416160.jpg"
   },
   {
-    "id": "221dacc7-98fe-44ff-af7a-ba599ea42145",
-    "name": "sample cat",
+    "id": "3a197464-aa10-4e79-8ea2-6a937a4eb0ec",
+    "name": "Sample Cat",
     "type": "cat",
-    "birthDate": "2021-02-21",
+    "birthDate": "2019-02-02",
     "imageUrl": ""
   },
   {
-    "id": "4fc08a8d-6622-4f2d-8f56-f7ba654c8ea0",
-    "name": "sample dog",
+    "id": "447101a3-6a28-4294-bbbc-5f5bd42c5d10",
+    "name": "Sample Dog",
     "type": "dog",
-    "birthDate": "2020-05-18",
+    "birthDate": "2016-01-05",
     "imageUrl": ""
   }
 ]

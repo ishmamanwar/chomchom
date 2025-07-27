@@ -28,7 +28,8 @@ export default function PetOverviewTab({ pet }: Props) {
       <div className="pet-info-sticky">
         <h3>{pet.name}</h3>
         <p>
-          <strong>Type:</strong> {pet.type}
+          <strong>Type:</strong>{" "}
+          {pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}
         </p>
         <p>
           <strong>Birth Date:</strong> {pet.birthDate}

@@ -5,16 +5,34 @@ import PetModal from "../../modals/PetModal";
 import { Pet } from "../../../features/pets/Pet";
 
 export default function PetListPage() {
-  const { pets, addPet, removePet } = usePets();
+  const { pets, addPet, updatePet, removePet } = usePets();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingPet, setEditingPet] = useState<Pet | null>(null);
 
   const handleSave = (petData: Omit<Pet, "id">) => {
-    const newPet = {
-      id: crypto.randomUUID?.() || String(Date.now()),
-      ...petData,
-    };
-    addPet(newPet);
+    if (editingPet) {
+      // Update existing pet
+      updatePet(editingPet.id, petData);
+      setEditingPet(null);
+    } else {
+      // Add new pet
+      const newPet = {
+        id: crypto.randomUUID?.() || String(Date.now()),
+        ...petData,
+      };
+      addPet(newPet);
+    }
     setIsModalOpen(false);
+  };
+
+  const handleEdit = (pet: Pet) => {
+    setEditingPet(pet);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditingPet(null);
   };
 
   return (
@@ -22,7 +40,12 @@ export default function PetListPage() {
       <div className="content-container">
         <div className="pet-grid">
           {pets.map((pet) => (
-            <PetCard key={pet.id} pet={pet} onRemove={removePet} />
+            <PetCard
+              key={pet.id}
+              pet={pet}
+              onRemove={removePet}
+              onEdit={handleEdit}
+            />
           ))}
           <button
             className="add-pet-button-as-card"
@@ -37,9 +60,9 @@ export default function PetListPage() {
       {isModalOpen && (
         <div className="modal-overlay">
           <PetModal
-            pet={null}
+            pet={editingPet}
             onSave={handleSave}
-            onClose={() => setIsModalOpen(false)}
+            onClose={handleCloseModal}
           />
         </div>
       )}
