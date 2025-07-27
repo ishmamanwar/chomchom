@@ -461,41 +461,71 @@ body::before {
 }
 
 /* ===================================
-   Feeding Schedule
+   Feeding / Medication Schedule
 =================================== */
-.add-entry-button {
+.feeding-add-entry-button,
+.medication-add-entry-button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: bold;
   border-radius: 20px;
-  background-color: #fff5c1;
   color: #5c4332;
-  border: 2px solid #e7d968;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s ease;
 }
 
-.add-entry-button:hover {
-  background-color: #f5e891;
+.feeding-add-entry-button {
+  background-color: #fff5c1;
+  border: 2px solid #e7d968;
+}
+
+.medication-add-entry-button {
+  background-color: #f7e1e6;
+  border: 2px solid #e4aeb9;
+}
+
+.feeding-add-entry-button:hover,
+.medication-add-entry-button:hover {
   transform: scale(1.03);
 }
 
-/* Feeding Modal Styles */
+.feeding-add-entry-button:hover {
+  background-color: #f5e891;
+}
+
+.medication-add-entry-button:hover {
+  background-color: #f0bec7;
+}
+
+/* Feeding / Medication Modal Styles */
+
 .feeding-modal .modal-content {
   background-color: #fff5c1;
   border-color: #e7d968;
 }
 
-.feeding-modal .modal-input-group {
+.medication-modal .modal-content {
+  background-color: #f7e1e6;
+  border-color: #e4aeb9;
+}
+
+.feeding-modal .modal-input-group,
+.medication-modal .modal-input-group {
   display: flex;
   justify-content: center;
   gap: 10px;
   width: 100%;
 }
 
-.feeding-modal .modal-input.short {
+.feeding-modal .modal-input.short,
+.medication-modal .modal-input.short {
   flex: 1;
   min-width: 0;
+}
+
+.feeding-modal .feeding-quantity,
+.medication-modal .medication-quantity {
+  width: 60px;
 }
 
 /* Quantity Input Combo */
@@ -521,8 +551,9 @@ body::before {
   font-family: "Nunito", sans-serif;
 }
 
-/* Feeding List Styles */
-.feeding-schedule-title {
+/* Feeding / Medication List Styles */
+.feeding-schedule-title,
+.medication-schedule-title {
   font-size: 20px;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -530,44 +561,72 @@ body::before {
 }
 
 .feeding-schedule-list {
+  border: 2px solid #e7d968;
+  background-color: #fff5c1;
+}
+
+.medication-schedule-list {
+  border: 2px solid #e4aeb9;
+  background-color: #f7e1e6;
+}
+
+.feeding-schedule-list,
+.medication-schedule-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  border: 2px solid #e7d968;
-  background-color: #fff5c1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   overflow: hidden;
   font-family: "Patrick Hand", cursive;
   font-size: 14px;
 }
 
+.modal-content .feeding-schedule-list,
+.modal-content .medication-schedule-list {
+  min-width: 300px;
+}
+
 .feeding-schedule-entry {
+  border-bottom: 2px dashed #e7d968;
+}
+
+.medication-schedule-entry {
+  border-bottom: 2px dashed #e4aeb9;
+}
+
+.feeding-schedule-entry,
+.medication-schedule-entry {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  border-bottom: 2px dashed #e7d968;
   line-height: 1.4;
   white-space: nowrap;
 }
 
-.feeding-schedule-entry:last-child {
+.feeding-schedule-entry:last-child,
+.medication-schedule-entry:last-child {
   border-bottom: none;
 }
 
 .feeding-time,
+.medication-time,
 .feeding-food,
-.feeding-quantity {
+.medication-med,
+.feeding-quantity,
+.medication-quantity {
   margin-right: 5px;
 }
 
-.feeding-time {
+.feeding-time,
+.medication-time {
   font-weight: bold;
   min-width: 55px;
   flex-shrink: 0;
 }
 
-.feeding-food {
+.feeding-food,
+.medication-med {
   flex-grow: 1;
   min-width: 25px;
   overflow: hidden;
@@ -575,7 +634,8 @@ body::before {
   white-space: nowrap;
 }
 
-.feeding-quantity {
+.feeding-quantity,
+.medication-quantity {
   width: 40px;
   color: #777;
   font-size: 12px;
@@ -583,25 +643,38 @@ body::before {
   flex-shrink: 0;
 }
 
-.feeding-buttons {
+.feeding-buttons,
+.medication-buttons {
   display: flex;
   gap: 4px;
   margin-left: 8px;
   flex-shrink: 0;
 }
 
-.feeding-buttons button {
+.feeding-buttons button,
+.medication-buttons button {
   font-size: 12px;
   border: none;
-  background-color: #fff5c1;
   color: #5c4332;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s;
 }
 
+.feeding-buttons button {
+  background-color: #fff5c1;
+}
+
+.medication-buttons button {
+  background-color: #f7e1e6;
+}
+
 .feeding-buttons button:hover {
   background-color: #e7d968;
+}
+
+.medication-buttons button:hover {
+  background-color: #e4aeb9;
 }
 
 .icon-pencil {
@@ -636,37 +709,44 @@ body::before {
     gap: 20px;
   }
 
-  .feeding-schedule-title {
+  .feeding-schedule-title,
+  .medication-schedule-title {
     font-size: 18px;
     margin-top: 12px;
     margin-bottom: 12px;
     color: #5c4332;
   }
 
-  .feeding-schedule-list {
+  .feeding-schedule-list,
+  .medication-schedule-list {
     font-size: 12px;
   }
 
-  .feeding-schedule-entry {
+  .feeding-schedule-entry,
+  .medication-schedule-entry {
     grid-template-columns: auto auto 1fr auto;
     font-size: 12px;
     padding: 8px;
   }
 
-  .feeding-time {
+  .feeding-time,
+  .medication-time {
     min-width: 30px;
   }
 
-  .feeding-buttons button {
+  .feeding-buttons button,
+  .medication-buttons button {
     font-size: 11px;
     padding: 2px 6px;
   }
 
-  .feeding-food {
+  .feeding-food,
+  .medication-med {
     flex-basis: 100%;
   }
 
-  .feeding-quantity {
+  .feeding-quantity,
+  .medication-quantity {
     text-align: left;
     width: auto;
     font-size: 12px;

@@ -41,7 +41,7 @@ export default function PetFeedingTab() {
 
   return (
     <div>
-      <button className="add-entry-button" onClick={openNewModal}>
+      <button className="feeding-add-entry-button" onClick={openNewModal}>
         + Add Food
       </button>
 
@@ -54,65 +54,70 @@ export default function PetFeedingTab() {
         }}
       >
         <h3 className="feeding-schedule-title">Feeding Schedule</h3>
-        <button
-          onClick={() => setIsListModalOpen(true)}
-          className="modal-close-button"
-          style={{
-            fontSize: "12px",
-            padding: "3px 5px",
-            border: "1px solid #e7d968",
-            borderRadius: "6px",
-            backgroundColor: "#fffbe6",
-            color: "#5c4332",
-          }}
-        >
-          📋
-        </button>
+        {entries.length > 0 && (
+          <button
+            onClick={() => setIsListModalOpen(true)}
+            className="modal-close-button"
+            style={{
+              fontSize: "12px",
+              padding: "3px 5px",
+              border: "1px solid #e7d968",
+              borderRadius: "6px",
+              backgroundColor: "#fffbe6",
+              color: "#5c4332",
+            }}
+          >
+            📋
+          </button>
+        )}
       </div>
+      {entries.length > 0 && (
+        <>
+          <ul className="feeding-schedule-list">
+            {entries
+              .slice()
+              .sort((a, b) => a.time.localeCompare(b.time))
+              .map((entry) => (
+                <li key={entry.id} className="feeding-schedule-entry">
+                  <span className="feeding-time">{entry.time}</span>
+                  <span className="feeding-food" title={entry.food}>
+                    {entry.food}
+                  </span>
+                  <span className="feeding-quantity">({entry.quantity})</span>
+                  <div className="feeding-buttons">
+                    <button
+                      className="icon-button"
+                      onClick={() => startEdit(entry.id)}
+                      title="Edit"
+                      aria-label="Edit entry"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon-pencil"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                      >
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+                      </svg>
+                    </button>
 
-      <ul className="feeding-schedule-list">
-        {entries
-          .slice()
-          .sort((a, b) => a.time.localeCompare(b.time))
-          .map((entry) => (
-            <li key={entry.id} className="feeding-schedule-entry">
-              <span className="feeding-time">{entry.time}</span>
-              <span className="feeding-food" title={entry.food}>
-                {entry.food}
-              </span>
-              <span className="feeding-quantity">({entry.quantity})</span>
-              <div className="feeding-buttons">
-                <button
-                  className="icon-button"
-                  onClick={() => startEdit(entry.id)}
-                  title="Edit"
-                  aria-label="Edit entry"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon-pencil"
-                    viewBox="0 0 24 24"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                  >
-                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
-                  </svg>
-                </button>
-
-                <button
-                  className="modal-close-button"
-                  style={{ fontSize: "16px", padding: "2px 6px" }}
-                  onClick={() => deleteEntry(entry.id)}
-                  title="Delete"
-                  aria-label="Delete entry"
-                >
-                  ✖
-                </button>
-              </div>
-            </li>
-          ))}
-      </ul>
+                    <button
+                      className="modal-close-button"
+                      style={{ fontSize: "16px", padding: "2px 6px" }}
+                      onClick={() => deleteEntry(entry.id)}
+                      title="Delete"
+                      aria-label="Delete entry"
+                    >
+                      ✖
+                    </button>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </>
+      )}
 
       {isModalOpen && (
         <FeedingEntryModal
