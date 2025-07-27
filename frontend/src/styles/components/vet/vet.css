@@ -22,15 +22,14 @@
 
 /* Vet Calendar Styling */
 .react-calendar {
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff5e6;
-  border: 2px solid #87d0dd;
+  width: 100% !important;
+  background-color: #fff5e6 !important;
+  border: 2px solid #87d0dd !important;
   border-radius: 12px;
   font-family: "Nunito", sans-serif;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
   margin-bottom: 16px;
+  overflow: hidden;
 }
 
 .react-calendar__navigation {
