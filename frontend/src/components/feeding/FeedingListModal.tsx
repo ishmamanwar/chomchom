@@ -1,4 +1,4 @@
-import { FeedingEntry } from "../../feeding/hooks";
+import { FeedingEntry } from "../../features/feeding/FeedingEntry";
 
 export default function FeedingListModal({
   entries,

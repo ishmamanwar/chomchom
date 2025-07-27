@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { useVet } from "../../vet/hooks";
+import { useVet } from "../../features/vet/hooks";
 import { useParams } from "react-router-dom";
 
 export default function PetVetTab() {

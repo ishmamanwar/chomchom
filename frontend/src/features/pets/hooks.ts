@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Pet } from "./types";
+import { Pet } from "./type";
 
 const API_BASE_URL = "http://127.0.0.1:5000/api";
 

@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-export interface FeedingEntry {
-  id: string;
-  pet_id: string;
-  time: string;
-  food: string;
-  quantity: string;
-}
+import { FeedingEntry } from "./FeedingEntry";
 
 const API_BASE_URL = "http://127.0.0.1:5000/api";
 

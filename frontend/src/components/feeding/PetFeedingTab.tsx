@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFeeding } from "../../feeding/hooks";
+import { useFeeding } from "../../features/feeding/hooks";
 import { useState } from "react";
 import FeedingEntryModal from "./FeedingEntryModal";
 import FeedingListModal from "./FeedingListModal";

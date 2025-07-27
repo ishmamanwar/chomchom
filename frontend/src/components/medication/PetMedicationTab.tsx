@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMedication } from "../../medications/hooks";
+import { useMedication } from "../../features/medications/hooks";
 import { useState } from "react";
 
 export default function PetMedicationTab() {

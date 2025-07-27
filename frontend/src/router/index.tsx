@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PetListPage from "../features/pets/pages/PetListPage";
-import PetDetailsPage from "../features/pets/pages/PetDetailsPage";
+import PetListPage from "../components/PetListPage";
+import PetDetailsPage from "../components/PetDetailsPage";
 import AppLayout from "../components/AppLayout";
 
 const router = createBrowserRouter([

@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { usePetById } from "../hooks";
-import PetOverviewTab from "../components/PetOverviewTab";
-import PetFeedingTab from "../components/PetFeedingTab";
-import PetMedicationTab from "../components/PetMedicationTab";
-import PetVetTab from "../components/PetVetTab";
+import { usePetById } from "../features/pets/hooks";
+import PetOverviewTab from "./overview/PetOverviewTab";
+import PetFeedingTab from "./feeding/PetFeedingTab";
+import PetMedicationTab from "./medication/PetMedicationTab";
+import PetVetTab from "./vet/PetVetTab";
 
 const tabs = ["Overview", "Feeding", "Medication", "Vet"];
 
