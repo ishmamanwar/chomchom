@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Pet } from "../features/pets/type";
+import { Pet } from "../../../features/pets/type";
 
 interface Props {
   pet: Pet;

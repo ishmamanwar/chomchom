@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Pet } from "../features/pets/type";
-import { uploadFile } from "../features/upload/hooks";
+import { Pet } from "../../../features/pets/type";
+import { uploadFile } from "../../../features/upload/hooks";
 
 interface PetModalProps {
   pet?: Pet | null;
