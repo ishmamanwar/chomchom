@@ -1,11 +1,11 @@
 import os
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
+from app.supabase_client import supabase, SUPABASE_BUCKET
+import uuid
 
-upload_bp = Blueprint("upload", __name__, url_prefix="/api")
+upload_bp = Blueprint("upload", __name__)
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "../../../uploads")
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 def allowed_file(filename):
@@ -14,18 +14,28 @@ def allowed_file(filename):
 @upload_bp.route("/upload", methods=["POST"])
 def upload_file():
     if "file" not in request.files:
-        return jsonify({"error": "No file part"}), 400
+        return jsonify({"error": "No file provided"}), 400
 
     file = request.files["file"]
-    if file.filename == "":
-        return jsonify({"error": "No selected file"}), 400
+    if file.filename == "" or not allowed_file(file.filename):
+        return jsonify({"error": "Invalid file type"}), 400
 
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(file_path)
-        return jsonify({
-    "url": f"{request.host_url.rstrip('/')}/uploads/{filename}"
-}), 201
+    filename = secure_filename(file.filename)
+    
+    # Generate a unique filename to avoid conflicts
+    file_id = str(uuid.uuid4())
+    file_extension = filename.rsplit(".", 1)[1].lower() if "." in filename else ""
+    unique_filename = f"{file_id}.{file_extension}" if file_extension else file_id
+    
+    file_path = f"uploads/{unique_filename}"
 
-    return jsonify({"error": "Invalid file type"}), 400
+    # Upload to Supabase Storage
+    try:
+        supabase.storage.from_(SUPABASE_BUCKET).upload(file_path, file.read(), {"content-type": file.content_type})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    # Get public URL
+    public_url = supabase.storage.from_(SUPABASE_BUCKET).get_public_url(file_path)
+
+    return jsonify({"message": "File uploaded", "url": public_url})

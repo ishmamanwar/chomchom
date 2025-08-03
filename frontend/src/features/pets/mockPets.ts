@@ -5,14 +5,14 @@ export const mockPets: Pet[] = [
     id: "1",
     name: "Chomchom",
     type: "cat",
-    birthDate: "2021-05-20",
-    imageUrl: "https://placekittens.com/200/300",
+    birth_date: "2021-05-20",
+    image_url: "https://placekittens.com/200/300",
   },
   {
     id: "2",
     name: "Tiger",
     type: "dog",
-    birthDate: "2020-08-10",
-    imageUrl: "https://placedog.net/200/200?id=2",
+    birth_date: "2020-08-10",
+    image_url: "https://placedog.net/200/200?id=2",
   },
 ];

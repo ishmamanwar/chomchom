@@ -5,14 +5,14 @@ class Pet:
         self.id = str(uuid4())
         self.name = name
         self.type = pet_type
-        self.birthDate = birth_date
-        self.imageUrl = image_url
+        self.birth_date = birth_date
+        self.image_url = image_url
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
             "type": self.type,
-            "birthDate": self.birthDate,
-            "imageUrl": self.imageUrl,
+            "birth_date": self.birth_date,
+            "image_url": self.image_url,
         }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:5000/api";
+const API_BASE_URL = "http://127.0.0.1:5000";
 
 export async function uploadFile(file: File): Promise<string> {
   const formData = new FormData();

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Appointment } from "./Appointment";
 import { Vaccination } from "./Vaccination";
 
-const API_BASE = "http://127.0.0.1:5000/api";
+const API_BASE = "http://127.0.0.1:5000";
 
 export function useVet(petId: string) {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -11,7 +11,7 @@ export function useVet(petId: string) {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE}/pets/${petId}/vet`)
+      .get(`${API_BASE}/vet/${petId}`)
       .then((res) => {
         setAppointments(res.data.appointments);
         setVaccinations(res.data.vaccinations);
@@ -19,15 +19,15 @@ export function useVet(petId: string) {
       .catch((err) => console.error("Failed to load vet data", err));
   }, [petId]);
 
-  const addAppointment = (appt: Appointment) => {
+  const addAppointment = (appt: Omit<Appointment, "id">) => {
     axios
-      .post(`${API_BASE}/pets/${petId}/vet/appointments`, appt)
+      .post(`${API_BASE}/vet/${petId}/appointments`, appt)
       .then((res) => setAppointments((prev) => [...prev, res.data]));
   };
 
   const updateAppointment = (id: string, updated: Partial<Appointment>) => {
     axios
-      .put(`${API_BASE}/pets/${petId}/vet/appointments/${id}`, updated)
+      .put(`${API_BASE}/vet/${petId}/appointments/${id}`, updated)
       .then(() => {
         setAppointments((prev) =>
           prev.map((a) => (a.id === id ? { ...a, ...updated } : a))
@@ -37,19 +37,19 @@ export function useVet(petId: string) {
 
   const deleteAppointment = (id: string) => {
     axios
-      .delete(`${API_BASE}/pets/${petId}/vet/appointments/${id}`)
+      .delete(`${API_BASE}/vet/${petId}/appointments/${id}`)
       .then(() => setAppointments((prev) => prev.filter((a) => a.id !== id)));
   };
 
-  const addVaccination = (vax: Vaccination) => {
+  const addVaccination = (vax: Omit<Vaccination, "id">) => {
     axios
-      .post(`${API_BASE}/pets/${petId}/vet/vaccinations`, vax)
+      .post(`${API_BASE}/vet/${petId}/vaccinations`, vax)
       .then((res) => setVaccinations((prev) => [...prev, res.data]));
   };
 
   const updateVaccination = (id: string, updated: Partial<Vaccination>) => {
     axios
-      .put(`${API_BASE}/pets/${petId}/vet/vaccinations/${id}`, updated)
+      .put(`${API_BASE}/vet/${petId}/vaccinations/${id}`, updated)
       .then(() => {
         setVaccinations((prev) =>
           prev.map((v) => (v.id === id ? { ...v, ...updated } : v))
@@ -59,7 +59,7 @@ export function useVet(petId: string) {
 
   const deleteVaccination = (id: string) => {
     axios
-      .delete(`${API_BASE}/pets/${petId}/vet/vaccinations/${id}`)
+      .delete(`${API_BASE}/vet/${petId}/vaccinations/${id}`)
       .then(() => setVaccinations((prev) => prev.filter((v) => v.id !== id)));
   };
 

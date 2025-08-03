@@ -19,10 +19,4 @@ def create_app():
     app.register_blueprint(vet_bp)
     app.register_blueprint(upload_bp)
 
-    # Serve uploaded images
-    @app.route("/uploads/<path:filename>")
-    def uploaded_file(filename):
-        upload_folder = os.path.join(os.path.dirname(__file__), "../../uploads")
-        return send_from_directory(upload_folder, filename)
-
     return app

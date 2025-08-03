@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pet } from "./Pet";
 
-const API_BASE_URL = "http://127.0.0.1:5000/api";
+const API_BASE_URL = "http://127.0.0.1:5000";
 
 export function usePets() {
   const [pets, setPets] = useState<Pet[]>([]);
@@ -10,7 +10,9 @@ export function usePets() {
   useEffect(() => {
     axios
       .get<Pet[]>(`${API_BASE_URL}/pets`)
-      .then((response) => setPets(response.data))
+      .then((response) => {
+        setPets(response.data);
+      })
       .catch((error) => console.error("Failed to fetch pets", error));
   }, []);
 
@@ -56,15 +58,25 @@ export function usePetById(id: string | undefined) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setPet(null);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
     axios
       .get<Pet>(`${API_BASE_URL}/pets/${id}`)
-      .then((res) => setPet(res.data))
-      .catch((err) => {
-        console.error("Failed to fetch pet by ID", err);
+      .then((response) => {
+        setPet(response.data);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch pet", error);
         setPet(null);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, [id]);
 
   return { pet, loading };

@@ -1,42 +1,51 @@
 from flask import Blueprint, request, jsonify
-from app.services import vet_store
+from app.services.vet_store import (
+    get_all,
+    add_appointment,
+    add_vaccination,
+    update_appointment,
+    update_vaccination,
+    delete_appointment,
+    delete_vaccination
+)
 
-vet_bp = Blueprint("vet", __name__, url_prefix="/api/pets/<pet_id>/vet")
+vet_bp = Blueprint("vet", __name__)
 
-@vet_bp.route("", methods=["GET"])
-def get_vet(pet_id):
-    return jsonify(vet_store.get_all(pet_id))
+@vet_bp.route("/vet/<pet_id>", methods=["GET"])
+def get_vet_data(pet_id):
+    data = get_all(pet_id)
+    return jsonify(data)
 
-@vet_bp.route("/appointments", methods=["POST"])
-def add_appointment(pet_id):
-    appt = request.json
-    result = vet_store.add_appointment(pet_id, appt)
-    return jsonify(result), 201
+@vet_bp.route("/vet/<pet_id>/appointments", methods=["POST"])
+def create_appointment(pet_id):
+    appointment_data = request.json
+    new_appointment = add_appointment(pet_id, appointment_data)
+    return jsonify(new_appointment), 201
 
-@vet_bp.route("/vaccinations", methods=["POST"])
-def add_vaccination(pet_id):
-    vax = request.json
-    result = vet_store.add_vaccination(pet_id, vax)
-    return jsonify(result), 201
+@vet_bp.route("/vet/<pet_id>/vaccinations", methods=["POST"])
+def create_vaccination(pet_id):
+    vaccination_data = request.json
+    new_vaccination = add_vaccination(pet_id, vaccination_data)
+    return jsonify(new_vaccination), 201
 
-@vet_bp.route("/appointments/<appt_id>", methods=["PUT"])
-def update_appointment(pet_id, appt_id):
-    data = request.json
-    vet_store.update_appointment(pet_id, appt_id, data)
-    return jsonify({"message": "Appointment updated"}), 200
+@vet_bp.route("/vet/<pet_id>/appointments/<appt_id>", methods=["PUT"])
+def edit_appointment(pet_id, appt_id):
+    updates = request.json
+    update_appointment(pet_id, appt_id, updates)
+    return jsonify({"message": "Appointment updated"})
 
-@vet_bp.route("/vaccinations/<vax_id>", methods=["PUT"])
-def update_vaccination(pet_id, vax_id):
-    data = request.json
-    vet_store.update_vaccination(pet_id, vax_id, data)
-    return jsonify({"message": "Vaccination updated"}), 200
+@vet_bp.route("/vet/<pet_id>/vaccinations/<vax_id>", methods=["PUT"])
+def edit_vaccination(pet_id, vax_id):
+    updates = request.json
+    update_vaccination(pet_id, vax_id, updates)
+    return jsonify({"message": "Vaccination updated"})
 
-@vet_bp.route("/appointments/<appt_id>", methods=["DELETE"])
-def delete_appointment(pet_id, appt_id):
-    vet_store.delete_appointment(pet_id, appt_id)
-    return "", 204
+@vet_bp.route("/vet/<pet_id>/appointments/<appt_id>", methods=["DELETE"])
+def remove_appointment(pet_id, appt_id):
+    delete_appointment(pet_id, appt_id)
+    return jsonify({"message": "Appointment deleted"})
 
-@vet_bp.route("/vaccinations/<vax_id>", methods=["DELETE"])
-def delete_vaccination(pet_id, vax_id):
-    vet_store.delete_vaccination(pet_id, vax_id)
-    return "", 204
+@vet_bp.route("/vet/<pet_id>/vaccinations/<vax_id>", methods=["DELETE"])
+def remove_vaccination(pet_id, vax_id):
+    delete_vaccination(pet_id, vax_id)
+    return jsonify({"message": "Vaccination deleted"})

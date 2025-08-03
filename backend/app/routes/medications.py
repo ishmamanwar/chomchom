@@ -1,26 +1,31 @@
 from flask import Blueprint, request, jsonify
-from app.services import medications_store
+from app.services.medications_store import (
+    get_medications_by_pet,
+    add_medication,
+    update_medication,
+    delete_medication
+)
 
-medications_bp = Blueprint("medications", __name__, url_prefix="/api/pets/<pet_id>/medications")
+medications_bp = Blueprint("medications", __name__)
 
-@medications_bp.route("", methods=["GET"])
+@medications_bp.route("/medications/<pet_id>", methods=["GET"])
 def get_medications(pet_id):
-    meds = medications_store.get_medications_for_pet(pet_id)
+    meds = get_medications_by_pet(pet_id)
     return jsonify(meds)
 
-@medications_bp.route("", methods=["POST"])
-def add_medication(pet_id):
-    data = request.json
-    new_entry = medications_store.add_medication_entry(pet_id, data)
-    return jsonify(new_entry), 201
+@medications_bp.route("/medications", methods=["POST"])
+def create_medication():
+    entry = request.json
+    new_med = add_medication(entry)
+    return jsonify(new_med), 201
 
-@medications_bp.route("/<entry_id>", methods=["PUT"])
-def update_medication(pet_id, entry_id):
-    data = request.json
-    medications_store.update_medication_entry(pet_id, entry_id, data)
-    return "", 204
+@medications_bp.route("/medications/<entry_id>", methods=["PUT"])
+def edit_medication(entry_id):
+    updates = request.json
+    updated_med = update_medication(entry_id, updates)
+    return jsonify(updated_med)
 
-@medications_bp.route("/<entry_id>", methods=["DELETE"])
-def delete_medication(pet_id, entry_id):
-    medications_store.delete_medication_entry(pet_id, entry_id)
-    return "", 204
+@medications_bp.route("/medications/<entry_id>", methods=["DELETE"])
+def remove_medication(entry_id):
+    delete_medication(entry_id)
+    return jsonify({"message": "Medication deleted"})

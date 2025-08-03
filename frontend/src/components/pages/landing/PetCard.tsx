@@ -45,8 +45,8 @@ export default function PetCard({ pet, onRemove, onEdit }: Props) {
       </button>
       <img
         src={
-          pet.imageUrl
-            ? pet.imageUrl
+          pet.image_url
+            ? pet.image_url
             : pet.type === "dog"
             ? "https://cdn.pixabay.com/photo/2022/01/26/02/10/dog-6967668_960_720.png"
             : "https://cdn.pixabay.com/photo/2020/11/15/18/31/cat-5746771_960_720.png"
@@ -54,7 +54,7 @@ export default function PetCard({ pet, onRemove, onEdit }: Props) {
         alt={pet.name}
       />
       <h3>{pet.name}</h3>
-      <p>{pet.birthDate}</p>
+      <p>{pet.birth_date}</p>
       <p className="sound">{pet.type === "dog" ? "~woof~" : "~meow~"}</p>
     </div>
   );

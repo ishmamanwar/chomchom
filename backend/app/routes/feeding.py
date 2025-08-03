@@ -1,25 +1,31 @@
 from flask import Blueprint, request, jsonify
-from app.services import feeding_store
+from app.services.feeding_store import (
+    get_feeding_entries_by_pet,
+    add_feeding_entry,
+    update_feeding_entry,
+    delete_feeding_entry
+)
 
-feeding_bp = Blueprint("feeding", __name__, url_prefix="/api/pets/<pet_id>/feeding")
+feeding_bp = Blueprint("feeding", __name__)
 
-@feeding_bp.route("", methods=["GET"])
+@feeding_bp.route("/feeding/<pet_id>", methods=["GET"])
 def get_feeding(pet_id):
-    return jsonify(feeding_store.get_entries_for_pet(pet_id))
+    entries = get_feeding_entries_by_pet(pet_id)
+    return jsonify(entries)
 
-@feeding_bp.route("", methods=["POST"])
-def post_feeding(pet_id):
-    data = request.json
-    new_entry = feeding_store.add_entry(pet_id, data)
+@feeding_bp.route("/feeding", methods=["POST"])
+def create_feeding():
+    entry = request.json
+    new_entry = add_feeding_entry(entry)
     return jsonify(new_entry), 201
 
-@feeding_bp.route("/<entry_id>", methods=["PUT"])
-def put_feeding(pet_id, entry_id):
-    data = request.json
-    feeding_store.update_entry(pet_id, entry_id, data)
-    return "", 204
+@feeding_bp.route("/feeding/<entry_id>", methods=["PUT"])
+def edit_feeding(entry_id):
+    updates = request.json
+    updated_entry = update_feeding_entry(entry_id, updates)
+    return jsonify(updated_entry)
 
-@feeding_bp.route("/<entry_id>", methods=["DELETE"])
-def delete_feeding(pet_id, entry_id):
-    feeding_store.delete_entry(pet_id, entry_id)
-    return "", 204
+@feeding_bp.route("/feeding/<entry_id>", methods=["DELETE"])
+def remove_feeding(entry_id):
+    delete_feeding_entry(entry_id)
+    return jsonify({"message": "Feeding entry deleted"})

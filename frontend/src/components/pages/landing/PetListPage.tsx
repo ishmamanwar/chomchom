@@ -11,16 +11,10 @@ export default function PetListPage() {
 
   const handleSave = (petData: Omit<Pet, "id">) => {
     if (editingPet) {
-      // Update existing pet
       updatePet(editingPet.id, petData);
       setEditingPet(null);
     } else {
-      // Add new pet
-      const newPet = {
-        id: crypto.randomUUID?.() || String(Date.now()),
-        ...petData,
-      };
-      addPet(newPet);
+      addPet(petData);
     }
     setIsModalOpen(false);
   };

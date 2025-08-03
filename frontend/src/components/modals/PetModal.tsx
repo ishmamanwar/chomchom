@@ -11,20 +11,20 @@ interface PetModalProps {
 export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
   const [name, setName] = useState(pet?.name || "");
   const [type, setType] = useState(pet?.type || "");
-  const [birthDate, setBirthDate] = useState(pet?.birthDate || "");
-  const [imageUrl, setImageUrl] = useState(pet?.imageUrl || "");
+  const [birth_date, setBirthDate] = useState(pet?.birth_date || "");
+  const [image_url, setImageUrl] = useState(pet?.image_url || "");
   const [fileUploading, setFileUploading] = useState(false);
   const [errors, setErrors] = useState<{
     name?: string;
     type?: string;
-    birthDate?: string;
+    birth_date?: string;
   }>({});
 
   useEffect(() => {
     setName(pet?.name || "");
     setType(pet?.type || "");
-    setBirthDate(pet?.birthDate || "");
-    setImageUrl(pet?.imageUrl || "");
+    setBirthDate(pet?.birth_date || "");
+    setImageUrl(pet?.image_url || "");
   }, [pet]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
   };
 
   const handleSubmit = () => {
-    const newErrors: { name?: string; type?: string; birthDate?: string } = {};
+    const newErrors: { name?: string; type?: string; birth_date?: string } = {};
 
     if (!name.trim()) {
       newErrors.name = "* Required";
@@ -53,14 +53,15 @@ export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
       newErrors.type = "* Required";
     }
 
-    if (!birthDate) {
-      newErrors.birthDate = "* Required";
+    if (!birth_date) {
+      newErrors.birth_date = "* Required";
     }
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      onSave({ name, type, birthDate, imageUrl });
+      const petData = { name, type, birth_date, image_url };
+      onSave(petData);
     }
   };
 
@@ -117,16 +118,16 @@ export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
           Birth Date:
           <input
             type="date"
-            className={`modal-input ${errors.birthDate ? "error" : ""}`}
-            value={birthDate}
+            className={`modal-input ${errors.birth_date ? "error" : ""}`}
+            value={birth_date}
             onChange={(e) => {
               setBirthDate(e.target.value);
-              if (errors.birthDate)
-                setErrors((prev) => ({ ...prev, birthDate: undefined }));
+              if (errors.birth_date)
+                setErrors((prev) => ({ ...prev, birth_date: undefined }));
             }}
           />
-          {errors.birthDate && (
-            <div className="validation-error">{errors.birthDate}</div>
+          {errors.birth_date && (
+            <div className="validation-error">{errors.birth_date}</div>
           )}
         </label>
 
@@ -142,9 +143,13 @@ export default function PetModal({ pet, onSave, onClose }: PetModalProps) {
 
       {fileUploading && <p>Uploading image...</p>}
 
-      {imageUrl && (
+      {image_url && (
         <div className="modal-preview-container">
-          <img src={imageUrl} alt="Pet preview" className="modal-preview-img" />
+          <img
+            src={image_url}
+            alt="Pet preview"
+            className="modal-preview-img"
+          />
         </div>
       )}
 

@@ -2,6 +2,6 @@ export interface Pet {
   id: string;
   name: string;
   type: string;
-  birthDate: string;
-  imageUrl?: string;
+  birth_date: string;
+  image_url?: string;
 }
