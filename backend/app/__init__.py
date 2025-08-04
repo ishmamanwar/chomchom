@@ -1,5 +1,5 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask
 from flask_cors import CORS
 
 from app.routes.pets import pets_bp
@@ -12,7 +12,6 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-    # Register all blueprints
     app.register_blueprint(pets_bp)
     app.register_blueprint(feeding_bp)
     app.register_blueprint(medications_bp)
