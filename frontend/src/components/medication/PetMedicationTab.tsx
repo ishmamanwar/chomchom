@@ -72,7 +72,7 @@ export default function PetMedicationTab() {
         )}
       </div>
 
-      {entries.length > 0 && (
+      {entries.length > 0 ? (
         <>
           <ul className="medication-schedule-list">
             {entries
@@ -120,6 +120,15 @@ export default function PetMedicationTab() {
               ))}
           </ul>
         </>
+      ) : (
+        <p
+          style={{
+            color: "#6d4c3d",
+            fontStyle: "italic",
+          }}
+        >
+          No medication entries recorded yet. Click the button above to add one!
+        </p>
       )}
 
       {isModalOpen && (

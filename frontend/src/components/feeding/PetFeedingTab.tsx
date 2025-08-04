@@ -71,7 +71,7 @@ export default function PetFeedingTab() {
           </button>
         )}
       </div>
-      {entries.length > 0 && (
+      {entries.length > 0 ? (
         <>
           <ul className="feeding-schedule-list">
             {entries
@@ -117,6 +117,15 @@ export default function PetFeedingTab() {
               ))}
           </ul>
         </>
+      ) : (
+        <p
+          style={{
+            color: "#6d4c3d",
+            fontStyle: "italic",
+          }}
+        >
+          No feeding entries recorded yet. Click the button above to add one!
+        </p>
       )}
 
       {isModalOpen && (

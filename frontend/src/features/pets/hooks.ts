@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pet } from "./Pet";
-
-const API_BASE_URL = "https://chomchom-backend.onrender.com";
+import { API_BASE_URL } from "../../config/api";
 
 export function usePets() {
   const [pets, setPets] = useState<Pet[]>([]);

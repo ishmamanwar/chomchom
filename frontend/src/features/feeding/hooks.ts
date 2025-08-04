@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FeedingEntry } from "./FeedingEntry";
-
-const API_BASE_URL = "https://chomchom-backend.onrender.com";
+import { API_BASE_URL } from "../../config/api";
 
 export function useFeeding(petId: string) {
   const [entries, setEntries] = useState<FeedingEntry[]>([]);

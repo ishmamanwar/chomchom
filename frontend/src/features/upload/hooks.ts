@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_BASE_URL = "https://chomchom-backend.onrender.com";
+import { API_BASE_URL } from "../../config/api";
 
 export async function uploadFile(file: File): Promise<string> {
   const formData = new FormData();

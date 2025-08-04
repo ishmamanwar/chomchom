@@ -61,7 +61,7 @@ export default function AppointmentsSection({
         tileClassName={tileClassName}
       />
 
-      <h3 className="vet-schedule-title">Upcoming Appointments</h3>
+      <h3 className="vet-schedule-title">Appointments</h3>
       {appointments.length > 0 ? (
         <ul className="vet-schedule-list">
           {appointments
