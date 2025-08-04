@@ -19,10 +19,6 @@ Technologies used:
     <img src="https://img.shields.io/badge/supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
 </p>
 
-<h6 align="center">
-  Like what you see? Give me a ⭐ to support my work!  
-</h6>
-
 ## 📋 Table of Contents
 
 1.  ⚙️ [Tech Stack](#tech-stack)
