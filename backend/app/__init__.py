@@ -11,7 +11,7 @@ from app.routes.upload import upload_bp
 def create_app():
     app = Flask(__name__)
     CORS(app, resources={r"/*": {
-        "origins": "https://chomchom.vercel.app"
+        "origins": ["https://chomchom.vercel.app", "http://localhost:3000", "http://localhost:3001"]
     }})
 
     app.register_blueprint(pets_bp)

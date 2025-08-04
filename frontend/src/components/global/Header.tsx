@@ -8,7 +8,7 @@ export default function Header() {
       <div className="centered-layout">
         <div className="content-container header-content">
           <img
-            src="https://i.imgur.com/1isMEWh.png"
+            src="/chomchom_logo.png"
             alt="Chomchom logo"
             className="header-logo"
             onClick={() => navigate("/")}
