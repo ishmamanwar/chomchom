@@ -95,6 +95,9 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    height: 37px;
+    line-height: 1.2;
+    min-height: 37px;
   }
 
   .modal-content {

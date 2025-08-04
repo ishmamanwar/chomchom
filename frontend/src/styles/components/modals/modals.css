@@ -104,6 +104,9 @@
   background-position: right 8px center;
   background-size: 16px;
   padding-right: 32px;
+  height: 37px;
+  line-height: 1.2;
+  min-height: 37px;
 }
 
 /* Specific styling for time inputs to prevent mobile overflow */
@@ -116,6 +119,9 @@
   background-position: right 8px center;
   background-size: 16px;
   padding-right: 32px;
+  height: 37px;
+  line-height: 1.2;
+  min-height: 37px;
 }
 
 .validation-error {
