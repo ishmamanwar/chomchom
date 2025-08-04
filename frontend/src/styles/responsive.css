@@ -86,4 +86,19 @@
     padding: 4px !important;
     min-height: 32px !important;
   }
+
+  .modal-input[type="date"],
+  .modal-input[type="time"] {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .modal-content {
+    max-width: calc(100vw - 24px);
+    overflow: hidden;
+  }
 }
