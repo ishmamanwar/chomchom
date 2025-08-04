@@ -37,7 +37,7 @@ export default function PetListPage() {
             <PetCard
               key={pet.id}
               pet={pet}
-              onRemove={removePet}
+              onRemove={pet.id === "1" ? () => {} : removePet}
               onEdit={handleEdit}
             />
           ))}
