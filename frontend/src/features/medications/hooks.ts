@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MedicationEntry } from "./MedicationEntry";
 
-const API_BASE_URL = "http://127.0.0.1:5000";
+const API_BASE_URL = "https://chomchom-backend.onrender.com";
 
 export function useMedication(petId: string) {
   const [entries, setEntries] = useState<MedicationEntry[]>([]);

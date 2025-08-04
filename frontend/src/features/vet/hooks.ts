@@ -3,7 +3,7 @@ import axios from "axios";
 import { Appointment } from "./Appointment";
 import { Vaccination } from "./Vaccination";
 
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "https://chomchom-backend.onrender.com";
 
 export function useVet(petId: string) {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
