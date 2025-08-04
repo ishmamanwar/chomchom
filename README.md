@@ -1,109 +1,101 @@
-# ChomChom - Pet Management App
+<div align="center">
+  <img src="https://i.imgur.com/1isMEWh.png" alt="ChomChom Logo">
+</div>
 
-![ChomChom Logo](https://i.imgur.com/1isMEWh.png)
+<h3 align="center">
+  A simple pet management application for tracking feeding, medications, and veterinary care
+</h3>
 
-A comprehensive pet management application built with React frontend and Flask backend, designed to help pet owners track their furry friends' care routines.
+<h4 align="center">
+Technologies used:
+</h4>
 
-## Live Application
+<p align="center">
+    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+    <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React">
+    <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python">
+    <img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+    <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="NodeJS">
+    <img src="https://img.shields.io/badge/supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase">
+</p>
+
+<h6 align="center">
+  Like what you see? Give me a ⭐ to support my work!  
+</h6>
+
+## 📋 Table of Contents
+
+1.  ⚙️ [Tech Stack](#tech-stack)
+2.  ✨ [Features](#features)
+3.  🚀 [Live Application](#live-application)
+4.  🛠️ [Deploy Locally](#deploy)
+
+## <a name="tech-stack">⚙️ Tech Stack </a>
+
+👉 **React**: Modern frontend framework with TypeScript for type safety and better development experience
+
+👉 **TypeScript**: Enhanced JavaScript with static typing for better code quality and developer experience
+
+👉 **Flask**: Lightweight Python web framework for building the REST API backend
+
+👉 **Supabase**: Modern database solution for scalable data storage and management
+
+👉 **Node.js**: JavaScript runtime for package management and development tools
+
+## <a name="features">✨ Features</a>
+
+1️⃣ **Pet Management**: Create detailed pet profiles with photos, breed information, and birth dates
+
+2️⃣ **Feeding Schedule**: Track feeding times, food types, and quantities with detailed history
+
+3️⃣ **Medication Tracking**: Manage medication schedules with dosages and administration times
+
+4️⃣ **Veterinary Care**: Schedule appointments and track vaccination records
+
+5️⃣ **Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
+
+6️⃣ **Real-time Updates**: Instant feedback for all actions with smooth user interactions
+
+7️⃣ **Image Upload**: Upload and manage pet photos with size restrictions and preview
+
+8️⃣ **Intuitive Interface**: Clean, pet-themed UI with warm colors and rounded design
+
+9️⃣ **Empty State Guidance**: Helpful messages and guidance when no data is present
+
+1️⃣0️⃣ **Modern Architecture**: Clean code structure with reusable components and scalable design
+
+## <a name="live-application">🚀 Live Application</a>
 
 **Visit the deployed application:** [https://chomchom.vercel.app/](https://chomchom.vercel.app/)
 
 The application is fully deployed and ready to use!
 
-## Features
+## <a name="deploy">🛠️ Deploy locally</a>
 
-### Pet Management
+Prerequisites:
 
-- **Add & Edit Pets**: Create detailed pet profiles with photos and information
-- **Pet Photos**: Upload and manage pet images
-- **Pet Details**: Store breed, age, weight, and other important information
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [Python](https://www.python.org/) (for backend development)
 
-### Feeding Schedule
+```
+# Clone the repository
+git clone <repository-url>
+cd chomchom
 
-- **Meal Tracking**: Record feeding times, food types, and quantities
-- **Schedule Management**: Organize feeding routines for multiple pets
-- **History View**: Review past feeding entries with detailed logs
+# Frontend Setup
+cd frontend
+npm install
+npm start
 
-### Medication Tracking
-
-- **Medication Schedules**: Set up medication routines with dosages
-- **Time Management**: Track when medications need to be administered
-- **Dosage Records**: Maintain detailed medication history
-
-### Veterinary Care
-
-- **Appointment Calendar**: Schedule and manage vet appointments
-- **Vaccination Records**: Track vaccination history and due dates
-- **Vet Information**: Store veterinarian contact details
-
-### User Experience
-
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- **Intuitive Interface**: Clean, pet-themed UI with warm colors
-- **Real-time Updates**: Instant feedback for all actions
-- **Empty State Messages**: Helpful guidance when no data is present
-
-## Tech Stack
-
-### Frontend
-
-- **React 18** with TypeScript
-- **React Router** for navigation
-- **Axios** for API communication
-- **Custom CSS** with responsive design
-- **React Calendar** for appointment scheduling
-
-### Backend
-
-- **Flask** (Python) REST API
-- **Flask-CORS** for cross-origin requests
-- **Supabase** for data storage
-- **Render** for backend hosting
-
-### Deployment
-
-- **Vercel** for frontend hosting
-- **Render** for backend hosting
-- **Supabase** for database management
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn package manager
-
-### Local Development Setup
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd chomchom
-   ```
-
-2. **Frontend Setup**
-
-   ```bash
-   cd frontend
-   npm install
-   npm start
-   ```
-
-   The frontend will be available at `http://localhost:3000`
-
-3. **Backend Setup** (Optional for local development)
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   python run.py
-   ```
-
-### Environment Configuration
-
-The application is configured to work with the deployed backend by default. For local development, you may need to update the API URL in `frontend/src/config/api.ts`.
+# Backend Setup (Optional for local development)
+cd ../backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python run.py
+```
 
 ## Project Structure
 
@@ -146,20 +138,6 @@ ChomChom features a warm, pet-friendly design with:
 - **Intuitive navigation** with clear visual hierarchy
 - **Helpful empty states** to guide new users
 
-## Deployment
-
-### Frontend (Vercel)
-
-- Automatically deployed from the main branch
-- Environment variables configured for production
-- Custom domain: [https://chomchom.vercel.app/](https://chomchom.vercel.app/)
-
-### Backend (Render)
-
-- Flask API deployed on Render
-- Database hosted on Supabase
-- CORS configured for both production and development
-
 ## Contributing
 
 This project is actively maintained. Feel free to:
@@ -173,5 +151,3 @@ This project is actively maintained. Feel free to:
 This project is developed by Ishmam Anwar.
 
 ---
-
-**Built with love for pet owners everywhere**
