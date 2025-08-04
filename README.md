@@ -25,40 +25,13 @@ This project is currently under active development. Features are being added and
 
 ## Follow Along
 
+### Updates
+
+- **08/04/2025** Backend has been deployed to https://chomchom-backend.onrender.com
+
 ### Prerequisites
 
 - Node.js (for frontend)
-- Python 3.7+ (for backend)
-- pip (Python package manager)
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-
-   ```bash
-   cd backend
-   ```
-
-2. Create and activate a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
-   source venv/bin/activate
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Start the Flask server:
-   ```bash
-   flask run
-   ```
 
 ### Frontend Setup
 
