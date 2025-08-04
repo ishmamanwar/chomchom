@@ -10,7 +10,9 @@ from app.routes.upload import upload_bp
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, resources={r"/*": {
+        "origins": "https://chomchom.vercel.app"
+    }})
 
     app.register_blueprint(pets_bp)
     app.register_blueprint(feeding_bp)
